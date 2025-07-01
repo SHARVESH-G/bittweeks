@@ -17,12 +17,12 @@ function PostTweek() {
               <Avatar sx={{ bgcolor: randomColor, width: 60, height: 60, fontSize: 30 }}>
                 {post.author[0].toUpperCase()}
               </Avatar>
-              <span className="font-semibold text-gray-700">@{post.author}</span>
+              <span className="font-semibold text-gray-400">@{post.author}</span>
             </div>
             <span>{formatDistanceToNow(new Date(post.postedAt), { addSuffix: true })}</span>
           </div>
 
-          <p className="text-gray-800 mb-3 whitespace-pre-wrap text-4xl">{post.tweet}</p>
+          <p className="text-gray-600 mb-3 whitespace-pre-wrap text-4xl">{post.tweet}</p>
 
           <div className="flex items-center text-sm text-gray-500">
             <span className="text-red-500 mr-1">
