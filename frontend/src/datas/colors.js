@@ -10,3 +10,8 @@ export const Colors = [
   '#F0E68C', '#FFD700', '#FFA500', '#FF8C00', '#FF7F50', '#CD5C5C', '#F08080', '#DC143C', '#B22222', '#800000',
   '#A52A2A', '#8B4513', '#A0522D', '#D2691E', '#BC8F8F', '#F5DEB3', '#DEB887', '#D2B48C', '#FFE4C4', '#FFDEAD'
 ];
+
+export const randomColor = () => {
+  const index = Math.floor(Math.random() * Colors.length);
+  return Colors[index];
+};

@@ -1,9 +1,9 @@
 import React from 'react';
+import PostTweek from '../../components/postTweek/postTweek';
 
 const Home = () => {
   return (
-    <div className="min-h-screen flex">
-      <h1 className="text-3xl font-bold">Home</h1>
+    <div className="min-h-screen flex flex-col"><PostTweek/>
     </div>
   );
 };

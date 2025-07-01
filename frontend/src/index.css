@@ -9,3 +9,11 @@
   --colorPrimaryTernary:#a88dfb;
   --colorSecondary:#6d6d6d;
 }
+.scrollbar-hide {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
