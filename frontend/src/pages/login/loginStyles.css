@@ -1,0 +1,15 @@
+@import "tailwindcss";
+
+
+.login-container {
+  @apply flex items-center justify-around h-screen bg-slate-200 px-4;
+}
+
+.login-bg {
+  @apply bg-white p-10 rounded-3xl shadow-xl w-full max-w-[40%];
+}
+
+.login-btn {
+  @apply w-full text-xl bg-[var(--colorPrimary)] hover:bg-[var(--colorPrimaryHover)] text-white py-2.5 rounded-[0%] font-semibold h-[55px] cursor-pointer;
+}
+

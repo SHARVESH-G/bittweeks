@@ -1,0 +1,22 @@
+export const departmentOptions = [
+  { label: "Agricultural Engineering", value: "Agricultural Engineering" },
+  { label: "Artificial Intelligence and Data Science", value: "Artificial Intelligence and Data Science" },
+  { label: "Artificial Intelligence and Machine Learning", value: "Artificial Intelligence and Machine Learning" },
+  { label: "Biomedical Engineering", value: "Biomedical Engineering" },
+  { label: "Biotechnology", value: "Biotechnology" },
+  { label: "Civil Engineering", value: "Civil Engineering" },
+  { label: "Computer Science & Business Systems", value: "Computer Science & Business Systems" },
+  { label: "Computer Science & Design", value: "Computer Science & Design" },
+  { label: "Computer Science & Engineering", value: "Computer Science & Engineering" },
+  { label: "Computer Technology", value: "Computer Technology" },
+  { label: "Electrical & Electronics Engineering", value: "Electrical & Electronics Engineering" },
+  { label: "Electronics & Communication Engineering", value: "Electronics & Communication Engineering" },
+  { label: "Electronics & Instrumentation Engineering", value: "Electronics & Instrumentation Engineering" },
+  { label: "Fashion Technology", value: "Fashion Technology" },
+  { label: "Food Technology", value: "Food Technology" },
+  { label: "Information Science & Engineering", value: "Information Science & Engineering" },
+  { label: "Information Technology", value: "Information Technology" },
+  { label: "Mechanical Engineering", value: "Mechanical Engineering" },
+  { label: "Mechatronics Engineering", value: "Mechatronics Engineering" },
+  { label: "Textile Technology", value: "Textile Technology" }
+];
