@@ -5,13 +5,7 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import { departmentOptions } from '../../../datas/departments';
 
-export default function SelectDept({ text = "Department", ...props }) {
-  const [selectedDept, setSelectedDept] = useState('');
-
-  const handleChange = (event) => {
-    setSelectedDept(event.target.value);
-  };
-
+export default function SelectDept({ text = "Department", name, value, onChange, ...props }) {
   return (
     <Box className="flex flex-col w-full pt-3">
       <label className="text-base text-gray-700 font-medium mb-1">
@@ -19,8 +13,9 @@ export default function SelectDept({ text = "Department", ...props }) {
       </label>
       <FormControl fullWidth size="small">
         <Select
-          value={selectedDept}
-          onChange={handleChange}
+          name={name}
+          value={value}
+          onChange={onChange}
           displayEmpty
           inputProps={{ 'aria-label': 'Select Department' }}
           {...props}

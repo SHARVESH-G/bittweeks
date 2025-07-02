@@ -7,12 +7,9 @@ import SelectDept from "../../components/ui/selectInput/selectInput";
 const Register = () => {
   return (
     <Box className="login-container">
-      {/* Logo on large screens only */}
       <Box className="hidden lg:block">
-        <img src={loginLogo} alt="Logo" className="w-64 mb-6 lg:mb-0" />
+        <img src={loginLogo} alt="Logo" className="w-64" />
       </Box>
-
-      {/* Form container */}
       <div className="login-bg">
         <Typography
           variant="h5"
@@ -28,21 +25,13 @@ const Register = () => {
               <Input label="Full Name" placeholder="Enter your full name" />
             </Grid>
             <Grid item xs={12} md={6}>
-              <SelectDept text="Department" className="w-full" />
+              <SelectDept text="Department" className="w-[100%]"/>
             </Grid>
             <Grid item xs={12} md={6}>
-              <Input
-                label="Email Address"
-                placeholder="example@example.com"
-                type="email"
-              />
+              <Input label="Email Address" placeholder="example@example.com" type="email" />
             </Grid>
             <Grid item xs={12} md={6}>
-              <Input
-                label="Password"
-                placeholder="********"
-                type="password"
-              />
+              <Input label="Password" placeholder="********" type="password" />
             </Grid>
           </Grid>
 
@@ -53,10 +42,7 @@ const Register = () => {
 
         <p className="text-center text-sm text-gray-500 mt-6">
           Already have an account?{" "}
-          <a
-            href="/login"
-            className="text-[var(--colorPrimary)] hover:underline"
-          >
+          <a href="/login" className="text-[var(--colorPrimary)] hover:underline">
             Login
           </a>
         </p>
