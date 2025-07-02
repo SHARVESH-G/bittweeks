@@ -9,7 +9,7 @@ import MyPost from './pages/mypost/mypost'
 import Users from './pages/user/user'
 import Profile from './pages/profile/profile'
 import Post from './pages/post/post'
-
+import Event from './pages/event/event'
 
 function App() {
   return (
@@ -28,6 +28,7 @@ function App() {
           <Route path="/users" element={<Users />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/posts" element={<Post />} />
+          <Route path="/events" element={<Event />} />
         </Route>
       </Routes>
     </BrowserRouter>

@@ -10,24 +10,33 @@ function PostTweek() {
       {posts.map((post) => (
         <div
           key={post.id}
-          className="bg-white p-4 rounded-2xl shadow-md border border-gray-200 hover:shadow-lg transition-shadow p-8"
+          className="bg-white px-4 py-5 rounded-xl shadow-md border border-gray-200 hover:shadow-lg transition-shadow"
         >
-          <div className="flex items-center justify-between text-2xl text-gray-500 mb-2">
-            <div className="flex items-center gap-2">
-              <Avatar sx={{ bgcolor: randomColor, width: 60, height: 60, fontSize: 30 }}>
+          <div className="flex items-center justify-between text-base text-gray-500 mb-3">
+            <div className="flex items-center gap-3">
+              <Avatar
+                sx={{
+                  bgcolor: randomColor,
+                  width: 48,
+                  height: 48,
+                  fontSize: 20,
+                }}
+              >
                 {post.author[0].toUpperCase()}
               </Avatar>
-              <span className="font-semibold text-gray-400">@{post.author}</span>
+              <span className="font-medium text-gray-600">@{post.author}</span>
             </div>
-            <span>{formatDistanceToNow(new Date(post.postedAt), { addSuffix: true })}</span>
+            <span className="text-sm text-gray-400">
+              {formatDistanceToNow(new Date(post.postedAt), { addSuffix: true })}
+            </span>
           </div>
 
-          <p className="text-gray-600 mb-3 whitespace-pre-wrap text-4xl">{post.tweet}</p>
+          <p className="text-gray-700 mb-3 whitespace-pre-wrap text-lg leading-relaxed">
+            {post.tweet}
+          </p>
 
           <div className="flex items-center text-sm text-gray-500">
-            <span className="text-red-500 mr-1">
-              <IoIosHeartEmpty size={35}/>
-            </span>
+            <IoIosHeartEmpty size={22} className="text-red-500 mr-2" />
             <span>{post.likes}</span>
           </div>
         </div>

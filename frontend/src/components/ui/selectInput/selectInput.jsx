@@ -1,12 +1,11 @@
-import * as React from 'react';
+import React, { useState } from 'react';
 import Box from '@mui/material/Box';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import { departmentOptions } from '../../../datas/departments';
-import { useState } from 'react';
 
-export default function SelectDept({ text }) {
+export default function SelectDept({ text = "Department", ...props }) {
   const [selectedDept, setSelectedDept] = useState('');
 
   const handleChange = (event) => {
@@ -14,14 +13,17 @@ export default function SelectDept({ text }) {
   };
 
   return (
-    <Box className="flex flex-col w-full pt-4">
-      <FormControl fullWidth>
-        <label className="text-xl text-gray-600 font-medium mb-1">{text}</label>
+    <Box className="flex flex-col w-full pt-3">
+      <label className="text-base text-gray-700 font-medium mb-1">
+        {text}
+      </label>
+      <FormControl fullWidth size="small">
         <Select
           value={selectedDept}
           onChange={handleChange}
           displayEmpty
-          inputProps={{ 'aria-label': 'Select Department'}}
+          inputProps={{ 'aria-label': 'Select Department' }}
+          {...props}
         >
           <MenuItem value="" disabled>
             Select Department

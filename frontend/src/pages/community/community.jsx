@@ -1,9 +1,63 @@
-import React from 'react'
+import * as React from 'react';
+import PropTypes from 'prop-types';
+import Tabs from '@mui/material/Tabs';
+import Tab from '@mui/material/Tab';
+import Box from '@mui/material/Box';
+import GroupList from '../../components/groups/groupList/groupList';
 
-const Community = () => {
+function CustomTabPanel(props) {
+  const { children, value, index, ...other } = props;
+
   return (
-    <h1>Community</h1>
-  )
+    <div
+      role="tabpanel"
+      hidden={value !== index}
+      id={`simple-tabpanel-${index}`}
+      aria-labelledby={`simple-tab-${index}`}
+      {...other}
+    >
+      {value === index && <Box sx={{ p: 3 }}>{children}</Box>}
+    </div>
+  );
 }
 
-export default Community;
+CustomTabPanel.propTypes = {
+  children: PropTypes.node,
+  index: PropTypes.number.isRequired,
+  value: PropTypes.number.isRequired,
+};
+
+function a11yProps(index) {
+  return {
+    id: `simple-tab-${index}`,
+    'aria-controls': `simple-tabpanel-${index}`,
+  };
+}
+
+export default function BasicTabs() {
+  const [value, setValue] = React.useState(0);
+
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
+
+  return (
+    <Box sx={{ width: '100%'}}>
+      <Box sx={{ borderBottom: 1, borderColor: 'divider'}}>
+        <Tabs value={value} onChange={handleChange} aria-label="basic tabs example"   >
+          <Tab label="Join New Group" {...a11yProps(0)} sx={{color:'var(--colorPrimary)' , fontWeight:'800'}} />
+          <Tab label="Your Groups" {...a11yProps(2)} sx={{color:'var(--colorPrimary)' , fontWeight:'800'}} />
+        </Tabs>
+      </Box>
+      <CustomTabPanel value={value} index={0}>
+        <GroupList />
+      </CustomTabPanel>
+      <CustomTabPanel value={value} index={1}>
+        Item Two
+      </CustomTabPanel>
+      <CustomTabPanel value={value} index={2}>
+        Item Three
+      </CustomTabPanel>
+    </Box>
+  );
+}
