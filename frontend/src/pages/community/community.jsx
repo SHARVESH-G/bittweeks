@@ -53,10 +53,7 @@ export default function BasicTabs() {
         <GroupList />
       </CustomTabPanel>
       <CustomTabPanel value={value} index={1}>
-        Item Two
-      </CustomTabPanel>
-      <CustomTabPanel value={value} index={2}>
-        Item Three
+        Your Groups
       </CustomTabPanel>
     </Box>
   );
