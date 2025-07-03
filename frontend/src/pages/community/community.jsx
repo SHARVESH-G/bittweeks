@@ -4,6 +4,7 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
 import GroupList from '../../components/groups/groupList/groupList';
+import CreateCommunity from '../../components/groups/createGroup/createGroup';
 
 function CustomTabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -47,6 +48,7 @@ export default function BasicTabs() {
         <Tabs value={value} onChange={handleChange} aria-label="basic tabs example"   >
           <Tab label="Join New Group" {...a11yProps(0)} sx={{color:'var(--colorPrimary)' , fontWeight:'800'}} />
           <Tab label="Your Groups" {...a11yProps(2)} sx={{color:'var(--colorPrimary)' , fontWeight:'800'}} />
+          <Tab label="Create Groups" {...a11yProps(2)} sx={{color:'var(--colorPrimary)' , fontWeight:'800'}} />
         </Tabs>
       </Box>
       <CustomTabPanel value={value} index={0}>
@@ -54,6 +56,9 @@ export default function BasicTabs() {
       </CustomTabPanel>
       <CustomTabPanel value={value} index={1}>
         Your Groups
+      </CustomTabPanel>
+      <CustomTabPanel value={value} index={2}>
+         <CreateCommunity />
       </CustomTabPanel>
     </Box>
   );
