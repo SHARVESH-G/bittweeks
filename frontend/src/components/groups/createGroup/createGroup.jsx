@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { FiUpload } from "react-icons/fi";
 
 const CreateCommunity = () => {
   const [name, setName] = useState("");

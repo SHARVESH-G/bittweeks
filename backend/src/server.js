@@ -3,13 +3,13 @@ import cors from 'cors'
 import dotenv from 'dotenv'
 dotenv.config()
 import { ConnectToDB } from './config/connectToDB.js'
-
+import authRoutes from './routes/authRoutes.js'
 
 
 const PORT = process.env.PORT
 const server = express();
 server.use(express.json());
-
+server.use(cors())
 
 ConnectToDB()
 .then(()=>{
@@ -20,3 +20,6 @@ ConnectToDB()
 .catch(()=>{
     console.log(`Can't Start Server Something Went Wrong`);
 })
+
+
+server.use('/api/auth' , authRoutes);
