@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
-import { tweetMaxLength } from '../../datas/projectParameters';
+import React, { useState } from "react";
+import { tweetMaxLength } from "../../datas/projectParameters";
 
 const Post = () => {
-  const [content, setContent] = useState('');
+  const [content, setContent] = useState("");
   const [image, setImage] = useState(null);
   const [preview, setPreview] = useState(null);
 
@@ -26,8 +26,10 @@ const Post = () => {
   return (
     <div className="flex justify-center mt-10">
       <div className="w-full max-w-md bg-white p-6 rounded-2xl shadow-md">
-        <h2 className="text-xl font-bold mb-4 text-[var(--colorPrimary)]">Create Tweet</h2>
-        
+        <h2 className="text-xl font-bold mb-4 text-[var(--colorPrimary)]">
+          Create Tweet
+        </h2>
+
         <textarea
           rows="5"
           placeholder="What's happening?"
@@ -41,12 +43,16 @@ const Post = () => {
           type="file"
           accept="image/*"
           onChange={handleImageChange}
-          className="mb-4"
+          className="mb-4 border border-1 border-gray-400 p-2 w-full rounded cursor-pointer"
         />
 
         {preview && (
           <div className="mb-4">
-            <img src={preview} alt="Preview" className="w-full h-auto rounded-lg" />
+            <img
+              src={preview}
+              alt="Preview"
+              className="w-full h-auto rounded-lg"
+            />
           </div>
         )}
 

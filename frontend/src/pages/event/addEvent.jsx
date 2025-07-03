@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
 const AddEvent = () => {
-  const [eventName, setEventName] = useState('');
-  const [description, setDescription] = useState('');
-  const [date, setDate] = useState('');
-  const [venue, setVenue] = useState('');
+  const [eventName, setEventName] = useState("");
+  const [description, setDescription] = useState("");
+  const [date, setDate] = useState("");
+  const [venue, setVenue] = useState("");
   const [image, setImage] = useState(null);
   const [preview, setPreview] = useState(null);
 
@@ -22,21 +22,22 @@ const AddEvent = () => {
 
   const handleSubmit = () => {
     const eventData = { eventName, description, date, venue, image };
-    console.log('Event submitted:', eventData);
-    alert('Event posted!');
-    setEventName('');
-    setDescription('');
-    setDate('');
-    setVenue('');
+    console.log("Event submitted:", eventData);
+    alert("Event posted!");
+    setEventName("");
+    setDescription("");
+    setDate("");
+    setVenue("");
     setImage(null);
     setPreview(null);
   };
 
   return (
     <div className="flex justify-center mt-10">
-      <div
-        className="w-full max-w-md bg-white p-6 rounded-2xl shadow-md">
-        <h2 className="text-xl font-bold mb-4 text-[var(--colorPrimary)]">Create Event</h2>
+      <div className="w-full max-w-md bg-white p-6 rounded-2xl shadow-md">
+        <h2 className="text-xl font-bold mb-4 text-[var(--colorPrimary)]">
+          Create Event
+        </h2>
 
         <input
           type="text"
@@ -73,12 +74,16 @@ const AddEvent = () => {
           type="file"
           accept="image/*"
           onChange={handleImageChange}
-          className="mb-4"
+          className="mb-4 border border-1 border-gray-400 p-2 w-full rounded cursor-pointer"
         />
 
         {preview && (
           <div className="mb-4">
-            <img src={preview} alt="Event" className="w-full h-auto rounded-lg" />
+            <img
+              src={preview}
+              alt="Event"
+              className="w-full h-auto rounded-lg"
+            />
           </div>
         )}
 

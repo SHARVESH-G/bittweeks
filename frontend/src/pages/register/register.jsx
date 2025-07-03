@@ -44,20 +44,14 @@ const Register = () => {
               <SelectDept text="Department" className="w-full" />
             </Grid>
             <Grid item xs={12} md={6}>
-              <Input
-                label="Email Address"
-                placeholder="example@example.com"
-                type="email"
-              />
+              <Input label="Email Address" placeholder="example@example.com" type="email" />
             </Grid>
             <Grid item xs={12} md={6}>
               <Input label="Password" placeholder="********" type="password" />
             </Grid>
             <Grid item xs={12}>
               <div className="flex flex-col gap-2">
-                <label className="font-medium text-sm text-gray-700">
-                  Profile Picture
-                </label>
+                <label className="font-medium text-sm text-gray-700">Profile Picture</label>
                 <input
                   type="file"
                   accept="image/*"
@@ -65,13 +59,11 @@ const Register = () => {
                   className="text-sm"
                 />
                 {preview && (
-                  <div className="flex justify-center mt-2">
                     <img
                       src={preview}
                       alt="Profile Preview"
-                      className="w-28 h-28 object-cover rounded-full border border-gray-300 shadow"
+                      className="w-28 h-28 object-cover rounded-full mt-2 border border-gray-300 shadow"
                     />
-                  </div>
                 )}
               </div>
             </Grid>
@@ -84,10 +76,7 @@ const Register = () => {
 
         <p className="text-center text-sm text-gray-500 mt-6">
           Already have an account?{" "}
-          <a
-            href="/login"
-            className="text-[var(--colorPrimary)] hover:underline font-medium"
-          >
+          <a href="/login" className="text-[var(--colorPrimary)] hover:underline font-medium">
             Login
           </a>
         </p>
