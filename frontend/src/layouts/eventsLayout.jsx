@@ -6,7 +6,7 @@ import { MdDensitySmall } from "react-icons/md";
 
 const EventsLayout = () => {
   return (
-    <div className="px-6 py-4">
+    <div className="px-6 py-4 ">
       <h1 className="text-3xl font-bold text-[var(--colorPrimary)] mb-4">
         Events
       </h1>
