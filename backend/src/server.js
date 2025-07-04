@@ -4,7 +4,7 @@ import dotenv from 'dotenv'
 dotenv.config()
 import { ConnectToDB } from './config/connectToDB.js'
 import authRoutes from './routes/authRoutes.js'
-
+import fetchAllUsers from './routes/fetchAllUsersRoutes.js'
 
 const PORT = process.env.PORT
 const server = express();
@@ -23,3 +23,4 @@ ConnectToDB()
 
 
 server.use('/api/auth' , authRoutes);
+server.use('/api',fetchAllUsers);

@@ -7,11 +7,18 @@ import { SiApostrophe } from "react-icons/si";
 import { IoLogOut } from "react-icons/io5";
 import { MdEmojiEvents } from "react-icons/md";
 import { FaEarthAmericas } from "react-icons/fa6";
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Icon from '../../assets/images/loginLogo.png';
 
 const Sidebar = () => {
   const location = useLocation();
+  const navigate = useNavigate();
+
+  const handleLogout = (e) => {
+    e.preventDefault(); 
+    localStorage.clear();
+    navigate('/');
+  };
 
   const navItems = [
     { to: '/dashboard', icon: <TiHome size={28} />, text: 'Home' },
@@ -21,7 +28,6 @@ const Sidebar = () => {
     { to: '/profile', icon: <IoMdSettings size={28} />, text: 'Settings' },
     { to: '/posts', icon: <SiApostrophe size={28} />, text: 'Post' },
     { to: '/events', icon: <MdEmojiEvents size={28} />, text: 'Events' },
-    { to: '/', icon: <IoLogOut size={28} />, text: 'Logout' },
   ];
 
   return (
@@ -29,7 +35,7 @@ const Sidebar = () => {
       <div className="p-4 border-b flex justify-center">
         <img src={Icon} alt="Logo" className="w-28 h-28 object-contain" />
       </div>
-      <nav className="flex flex-col px-4 py-6 space-y-3">
+      <nav className="flex flex-col px-4 py-6 space-y-3 select-none">
         {navItems.map(({ to, icon, text }) => {
           const isActive = location.pathname === to;
           return (
@@ -47,6 +53,15 @@ const Sidebar = () => {
             </Link>
           );
         })}
+
+        <Link
+          to="/"
+          onClick={handleLogout}
+          className="px-4 py-3 rounded-xl flex items-center text-lg gap-3 text-[var(--colorSecondary)] hover:bg-[var(--colorPrimary)] hover:text-white transition-colors"
+        >
+          <IoLogOut size={28} />
+          <span className="truncate">Logout</span>
+        </Link>
       </nav>
     </div>
   );

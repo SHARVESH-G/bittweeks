@@ -1,15 +1,18 @@
-import { useState } from "react";
+import useFetchData from "../../../hooks/userFetchData";
 import UserCard from "../userCard/userCard";
-import { AllUsers } from "../../../datas/temp/allUsers";
+import { useState } from "react";
+import { MoonLoader } from "react-spinners";
 
 const UserList = () => {
-  const [search, setSearch] = useState('');
+  const [search, setSearch] = useState("");
+  const { data, loading, error } = useFetchData("/api/users");
+  const users = data?.users || [];
 
-  const filteredUsers = AllUsers.filter(
+  const filteredUsers = users.filter(
     (user) =>
       user.name.toLowerCase().includes(search.toLowerCase()) ||
-      user.username.toLowerCase().includes(search.toLowerCase()) ||
-      user.dept.toLowerCase().includes(search.toLowerCase())
+      user.email.toLowerCase().includes(search.toLowerCase()) ||
+      user.department.toLowerCase().includes(search.toLowerCase())
   );
 
   return (
@@ -21,18 +24,26 @@ const UserList = () => {
       <div className="max-w-lg mx-auto mb-8">
         <input
           type="text"
-          placeholder="Search by name, username, or department..."
+          placeholder="Search by name, email, or department..."
           className="w-full px-4 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--colorPrimary)]"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
         />
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
-        {filteredUsers.map((user) => (
-          <UserCard key={user.id} user={user} />
-        ))}
-      </div>
+      {loading ? (
+        <div className="flex justify-center py-10">
+          <MoonLoader size={35} color="#3498db" />
+        </div>
+      ) : error ? (
+        <p className="text-center text-red-500">{error}</p>
+      ) : (
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
+          {filteredUsers.map((user) => (
+            <UserCard key={user._id} user={user} />
+          ))}
+        </div>
+      )}
     </div>
   );
 };

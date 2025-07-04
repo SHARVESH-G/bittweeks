@@ -50,7 +50,8 @@ const login = async (req, res) => {
                 _id: fetchedUser._id,
                 name: fetchedUser.name,
                 email: fetchedUser.email,
-                department: fetchedUser.department
+                department: fetchedUser.department,
+                profilePic:fetchedUser.profilePic
             }
         });
 

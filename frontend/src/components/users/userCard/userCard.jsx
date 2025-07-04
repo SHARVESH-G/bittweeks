@@ -3,24 +3,42 @@ import { randomColor } from "../../../datas/colors";
 
 const UserCard = ({ user }) => {
   return (
-    <div className="bg-slate-100 rounded-2xl p-6 hover:shadow-2xl transition-shadow border border-[var(--colorPrimaryTernary)] flex flex-col items-center text-center">
+    <div className="bg-white rounded-2xl p-4 shadow-sm hover:shadow-md transition-all duration-200 flex flex-col items-center text-center gap-2 border border-[var(--colorPrimary)] border-0.5">
       <Avatar
+        src={user.profilePic || ""}
         sx={{
-          bgcolor: randomColor,
-          width: 72,
-          height: 72,
-          fontSize: 32,
-          mb: 2,
+          bgcolor: user.profilePic ? "transparent" : randomColor,
+          width: 60,
+          height: 60,
+          fontSize: 22,
         }}
       >
-        {user.name.slice(0, 1)}
+        {!user.profilePic && user.name.slice(0, 1).toUpperCase()}
       </Avatar>
-      <h2 className="text-xl font-semibold text-[var(--colorPrimary)]">{user.name}</h2>
-      <p className="text-sm text-gray-500 mb-3">{user.username}</p>
-      <span className="inline-block border border-black text-black text-xs font-medium px-3 py-1 rounded-[12px]">
-        {user.dept.toUpperCase()}
-      </span>
-      <Button sx={{marginTop:'8px' , fontSize:'12px' , fontWeight:'bolder' , color:'var(--colorPrimary)'}}>Follow</Button>
+
+      <div className="flex flex-col items-center">
+        <h2 className="text-base font-semibold text-gray-800">{user.name}</h2>
+        <p className="text-xs text-gray-500">{user.email}</p>
+        <span className="mt-1 text-[10px] text-[var(--colorPrimary)] bg-gray-100 border border-[var(--colorPrimary)] px-2 py-[2px] rounded-full">
+          {user.department.toUpperCase()}
+        </span>
+      </div>
+
+      <Button
+        variant="outlined"
+        size="small"
+        sx={{
+          fontSize: "11px",
+          textTransform: "none",
+          fontWeight: "bold",
+          mt: 1,
+          borderRadius: "8px",
+          color: "var(--colorPrimary)",
+          borderColor: "var(--colorPrimary)"
+        }}
+      >
+        Follow
+      </Button>
     </div>
   );
 };
