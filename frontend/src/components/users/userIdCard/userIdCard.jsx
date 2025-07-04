@@ -1,7 +1,7 @@
 import { Avatar } from '@mui/material';
+import { loggedInUser } from '../../../hooks/loggedInUser';
 
 const UserIdCard = () => {
-  const loggedInUser = JSON.parse(localStorage.getItem('user'));
   return (
     <div className="flex items-center justify-center gap-3 py-3 border-b border-gray-300 select-none">
       {
