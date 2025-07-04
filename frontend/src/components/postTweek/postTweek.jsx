@@ -4,6 +4,8 @@ import Avatar from "@mui/material/Avatar";
 import useFetchData from "../../hooks/userFetchData";
 import { randomColor } from "../../datas/colors";
 
+
+
 function PostTweek() {
   const { data, loading, error } = useFetchData("/api/getallpost");
   const posts = data?.posts || [];
@@ -67,7 +69,7 @@ function PostTweek() {
                 <img
                   src={post.postImage}
                   alt="Post"
-                  className="rounded-lg mt-3 w-full max-h-56 object-cover border border-gray-100"
+                  className="rounded-lg mt-3 w-full max-h-56 object-contains border border-gray-100"
                 />
               )}
 
