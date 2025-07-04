@@ -28,7 +28,7 @@ const RecommendedUser = () => {
     setRecommendedUsers(getRandomUsers(allUsers, 3));
   };
 
-
+  const  currentUser = loggedInUser();
 
   return (
     <div className="bg-white px-6 py-8 rounded-xl shadow">
@@ -64,7 +64,7 @@ const RecommendedUser = () => {
                   <div className="text-xs">
                     <div className="flex gap-6">
                       <p className="font-medium">{user.name}</p>
-                      {user.department === loggedInUser.department && (
+                      {user.department === currentUser.department && (
                         <CustomChip
                           text="Your Dept"
                           bgcolor="var(--colorPrimaryTernary)"

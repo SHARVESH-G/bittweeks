@@ -1,4 +1,4 @@
-import { Box, Typography, Grid } from "@mui/material";
+import { Box, Typography, Grid  } from "@mui/material";
 import { useState } from "react";
 import Input from "../../components/ui/input/input";
 import SelectDept from "../../components/ui/selectInput/selectInput";
@@ -7,6 +7,7 @@ import "./registerStyles.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast, Bounce } from "react-toastify";
+import ImageToBase64 from "../../helper/ImageToBase";
 
 const Register = () => {
   const [name, setname] = useState("");
@@ -18,45 +19,41 @@ const Register = () => {
 
   const navigate = useNavigate();
 
-  const handleImageChange = (e) => {
+  const handleImageChange = async (e) => {
     const file = e.target.files[0];
     if (!file) return;
 
     if (file.size > 1024 * 1024) {
-      toast.warn('Image too large. Please upload an image smaller than 1MB.', {
+      toast.warn("Image too large. Please upload an image smaller than 1MB.", {
         position: "top-center",
         autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: false,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
         theme: "colored",
         transition: Bounce,
       });
       return;
     }
 
-    const reader = new FileReader();
-    reader.onloadend = () => {
-      setProfileImage(reader.result);
-      setPreview(reader.result);
-    };
-    reader.readAsDataURL(file);
+    try {
+      const base64 = await ImageToBase64(file);
+      setProfileImage(base64);
+      setPreview(base64);
+    } catch (error) {
+      toast.error("Failed to read image file.", {
+        position: "top-center",
+        autoClose: 3000,
+        theme: "colored",
+        transition: Bounce,
+      });
+    }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (!name || !email || !password || !department) {
-      toast.info('Please fill all fields.', {
+      toast.info("Please fill all fields.", {
         position: "top-center",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: false,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
+        autoClose: 3000,
         theme: "colored",
         transition: Bounce,
       });
@@ -69,11 +66,11 @@ const Register = () => {
         email,
         password,
         department,
-        profileImage,
+        profilePic: profileImage,
       });
 
       if (response.status === 201 || response.data.success) {
-        toast.success("Logged in successfully!", {
+        toast.success("Registered successfully!", {
           position: "top-center",
           autoClose: 3000,
           theme: "colored",
@@ -81,7 +78,7 @@ const Register = () => {
         });
         navigate("/login");
       } else {
-        toast.error("Loggin Failed!", {
+        toast.error("Registration failed!", {
           position: "top-center",
           autoClose: 3000,
           theme: "colored",
@@ -91,9 +88,9 @@ const Register = () => {
     } catch (error) {
       const msg = error.response?.data?.message || "Registration failed!";
       toast.info(msg, {
-        position: 'top-center',
+        position: "top-center",
         autoClose: 3000,
-        theme: 'colored',
+        theme: "colored",
         transition: Bounce,
       });
     }

@@ -8,8 +8,8 @@ import fetchAllUsers from './routes/fetchAllUsersRoutes.js'
 
 const PORT = process.env.PORT
 const server = express();
-server.use(express.json());
-server.use(cors())
+server.use(express.json({limit:"5mb"}));
+server.use(cors({origin: "http://localhost:5173"}))
 
 ConnectToDB()
 .then(()=>{

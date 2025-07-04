@@ -51,7 +51,8 @@ const login = async (req, res) => {
                 name: fetchedUser.name,
                 email: fetchedUser.email,
                 department: fetchedUser.department,
-                profilePic:fetchedUser.profilePic
+                profilePic:fetchedUser.profilePic,
+                followers:fetchedUser.followers
             }
         });
 

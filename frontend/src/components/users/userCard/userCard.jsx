@@ -20,6 +20,7 @@ const UserCard = ({ user }) => {
       <div className="flex flex-col items-center">
         <h2 className="text-base font-semibold text-gray-800">{user.name}</h2>
         <p className="text-xs text-gray-500">{user.email}</p>
+        <p className="text-xs text-gray-500 mt-2">Followers : {user.followers}</p>
         <span className="mt-1 text-[10px] text-[var(--colorPrimary)] bg-gray-100 border border-[var(--colorPrimary)] px-2 py-[2px] rounded-full">
           {user.department.toUpperCase()}
         </span>
