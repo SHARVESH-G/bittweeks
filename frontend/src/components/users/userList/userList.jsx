@@ -10,7 +10,7 @@ const UserList = () => {
 
   const filteredUsers = users.filter(
     (user) =>
-      user.name.toLowerCase().includes(search.toLowerCase()) ||
+      user.name.toLowerCase().includes(search.toLowerCase())   ||
       user.email.toLowerCase().includes(search.toLowerCase()) ||
       user.department.toLowerCase().includes(search.toLowerCase())
   );
