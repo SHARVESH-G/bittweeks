@@ -7,24 +7,24 @@ const UserPost = ({post}) => {
   return (
     <div
       key={post._id}
-      className="bg-white px-5 py-4 rounded-xl shadow-sm border border-gray-200 hover:shadow-md transition-all"
+      className="bg-white my-4 w- px-5 py-4 rounded-xl shadow-sm border border-gray-200 hover:shadow-md transition-all"
     >
       <div className="flex items-start gap-3">
         <Avatar
-          src={post.postAuthor.profilePic || ""}
+          src={post.postAuthor?.profilePic || ""}
           sx={{
-            bgcolor: post.postAuthor.profilePic ? "transparent" : randomColor,
+            bgcolor: post.postAuthor?.profilePic ? "transparent" : randomColor,
             width: 40,
             height: 40,
             fontSize: 16,
           }}
         >
-          {!post.postAuthor.profilePic &&
-            post.postAuthor.name?.[0]?.toUpperCase()}
+          {!post.postAuthor?.profilePic &&
+            post.postAuthor?.name?.[0]?.toUpperCase()}
         </Avatar>
 
         <div className="flex-1">
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between gap-8">
             <span className="font-medium text-sm text-gray-800">
               {post.postAuthor.name}
             </span>

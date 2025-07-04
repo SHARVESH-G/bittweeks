@@ -3,6 +3,9 @@ import axios from "axios";
 import ImageToBase64 from "../../helper/ImageToBase";
 import { tweetMaxLength } from "../../datas/projectParameters";
 import { loggedInUser } from "../../hooks/loggedInUser";
+import { ToastContainer, toast, Bounce } from "react-toastify";
+import { useNavigate } from "react-router-dom";
+
 
 const Post = () => {
   const [content, setContent] = useState("");
@@ -10,12 +13,24 @@ const Post = () => {
   const [preview, setPreview] = useState(null);
   const [loading, setLoading] = useState(false);
 
+  const navi = useNavigate();
+
   const handleImageChange = async (e) => {
     const file = e.target.files[0];
     if (!file) return;
 
     if (file.size > 1024 * 1024) {
-      alert("Image too large. Please use a file < 1MB.");
+      toast.warn("The Image Size Should Be Less Than 1MB", {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+        transition: Bounce,
+      });
       return;
     }
 
@@ -30,7 +45,17 @@ const Post = () => {
 
   const handlePost = async () => {
     if (!content) {
-      alert("Please fill all fields");
+      toast.info('Enter Title', {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+        transition: Bounce,
+      });
       return;
     }
 
@@ -43,14 +68,35 @@ const Post = () => {
       });
 
       if (res.status === 201) {
-        alert("Posted successfully!");
+        toast.success('🦄 Wow so easy!', {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: false,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+          transition: Bounce,
+        });
         setContent("");
         setImage(null);
         setPreview(null);
+        navi('/');
       }
     } catch (err) {
       console.error("Post failed:", err);
-      alert("Something went wrong while posting.");
+      toast.info('Something went wrong while posting ', {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+        transition: Bounce,
+      });
     } finally {
       setLoading(false);
     }
@@ -58,6 +104,7 @@ const Post = () => {
 
   return (
     <div className="flex justify-center mt-10">
+      <ToastContainer />
       <div className="w-full max-w-md bg-white p-6 rounded-2xl shadow-md">
         <h2 className="text-xl font-bold mb-4 text-[var(--colorPrimary)]">
           Create Tweet

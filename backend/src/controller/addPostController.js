@@ -38,7 +38,7 @@ const fetchAllPost = async (req, res) => {
 const fetchUserPost = async(req,res)=>{
   try{
     const {userId} = req.query;
-    const userPosts = await Post.find({postAuthor : userId}).sort({createdAt:-1})
+    const userPosts = await Post.find({postAuthor : userId}).populate("postAuthor" , "name profilePic").sort({createdAt:-1})
     return res.status(200).json({userPosts})
   }catch(err){
     return res.status(500).json({message:"Something Went Wrong"})
