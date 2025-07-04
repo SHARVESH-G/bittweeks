@@ -8,7 +8,7 @@ const UserIdCard = () => {
       {
         currentUser.profilePic 
                     ? <Avatar sx={{ width: 30, height: 30, fontSize: 14 }} src={currentUser.profilePic}/>
-                    : <Avatar sx={{ width: 30, height: 30, fontSize: 14 }}>A</Avatar>
+                    : <Avatar sx={{ width: 30, height: 30, fontSize: 14 }}>{currentUser.name.slice(0,1).toUpperCase()}</Avatar>
       }
       <div className="text-center">
         <h2 className="text-sm font-medium">{currentUser.name}</h2>
