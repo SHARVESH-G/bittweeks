@@ -33,7 +33,7 @@ const UserList = () => {
 
       {loading ? (
         <div className="flex justify-center py-10">
-          <MoonLoader size={35} color="#3498db" />
+          <MoonLoader size={35} color="var(--colorPrimary)" />
         </div>
       ) : error ? (
         <p className="text-center text-red-500">{error}</p>

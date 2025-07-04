@@ -5,6 +5,7 @@ import useFetchData from "../../hooks/userFetchData";
 import { loggedInUser } from "../../hooks/loggedInUser";
 import UserPost from "../../components/usersPost/userPost";
 import { TbFilterDown , TbFilterUp  } from "react-icons/tb";
+import { MoonLoader } from "react-spinners";
 
 
 const MyPost = () => {
@@ -18,7 +19,13 @@ const MyPost = () => {
   );
   const myPosts = data?.userPosts || [];
 
-  if (loading) return <Typography>Loading...</Typography>;
+  if (loading){
+    return (
+      <div className="flex justify-center py-10">
+          <MoonLoader size={35} color="var(--colorPrimary)" />
+      </div>
+    )
+  }
   if (error) return <Typography>Error fetching posts</Typography>;
   const sortedPost = filter ? [...myPosts].reverse() : myPosts;
   const FilterIcon = filter ? <TbFilterDown/> : <TbFilterUp/>

@@ -3,6 +3,7 @@ import { IoIosHeartEmpty } from "react-icons/io";
 import Avatar from "@mui/material/Avatar";
 import useFetchData from "../../hooks/userFetchData";
 import { randomColor } from "../../datas/colors";
+import { MoonLoader } from "react-spinners";
 
 
 
@@ -12,8 +13,8 @@ function PostTweek() {
 
   if (loading) {
     return (
-      <div className="text-center py-10 text-gray-500 font-medium">
-        Loading posts...
+      <div className="flex justify-center py-10">
+          <MoonLoader size={55} color="var(--colorPrimary)" />
       </div>
     );
   }
