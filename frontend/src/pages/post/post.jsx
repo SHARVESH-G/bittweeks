@@ -1,26 +1,59 @@
 import React, { useState } from "react";
+import axios from "axios";
+import ImageToBase64 from "../../helper/ImageToBase";
 import { tweetMaxLength } from "../../datas/projectParameters";
+import { loggedInUser } from "../../hooks/loggedInUser";
 
 const Post = () => {
   const [content, setContent] = useState("");
   const [image, setImage] = useState(null);
   const [preview, setPreview] = useState(null);
+  const [loading, setLoading] = useState(false);
 
-  const handleImageChange = (e) => {
+  const handleImageChange = async (e) => {
     const file = e.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setImage(reader.result);
-        setPreview(reader.result);
-      };
-      reader.readAsDataURL(file);
+    if (!file) return;
+
+    if (file.size > 1024 * 1024) {
+      alert("Image too large. Please use a file < 1MB.");
+      return;
+    }
+
+    try {
+      const base64 = await ImageToBase64(file);
+      setImage(base64);
+      setPreview(base64);
+    } catch (err) {
+      console.error("Error converting image:", err);
     }
   };
 
-  const handlePost = () => {
-    alert("Posted!");
-    console.log({ content, image });
+  const handlePost = async () => {
+    if (!content) {
+      alert("Please fill all fields");
+      return;
+    }
+
+    setLoading(true);
+    try {
+      const res = await axios.post("http://localhost:3000/api/addnewpost", {
+        postTitle: content,
+        postImage: image,
+        postAuthor: loggedInUser()._id,
+      });
+
+      if (res.status === 201) {
+        alert("Posted successfully!");
+        setContent("");
+        setImage(null);
+        setPreview(null);
+      }
+    } catch (err) {
+      console.error("Post failed:", err);
+      alert("Something went wrong while posting.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -58,9 +91,14 @@ const Post = () => {
 
         <button
           onClick={handlePost}
-          className="w-full bg-[var(--colorPrimary)] hover:bg-[var(--colorPrimaryHover)] text-white py-2 px-4 rounded-lg transition"
+          disabled={loading}
+          className={`w-full py-2 px-4 rounded-lg transition text-white ${
+            loading
+              ? "bg-gray-400 cursor-not-allowed"
+              : "bg-[var(--colorPrimary)] hover:bg-[var(--colorPrimaryHover)]"
+          }`}
         >
-          Post
+          {loading ? "Posting..." : "Post"}
         </button>
       </div>
     </div>

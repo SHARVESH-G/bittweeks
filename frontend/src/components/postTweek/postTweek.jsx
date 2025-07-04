@@ -1,43 +1,81 @@
-import { posts } from "../../datas/temp/posts";
 import { formatDistanceToNow } from "date-fns";
 import { IoIosHeartEmpty } from "react-icons/io";
 import Avatar from "@mui/material/Avatar";
+import useFetchData from "../../hooks/userFetchData";
 import { randomColor } from "../../datas/colors";
 
 function PostTweek() {
+  const { data, loading, error } = useFetchData("/api/getallpost");
+  const posts = data?.posts || [];
+
+  if (loading) {
+    return (
+      <div className="text-center py-10 text-gray-500 font-medium">
+        Loading posts...
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="text-center text-red-500 py-10 font-medium">
+        {error}
+      </div>
+    );
+  }
+
   return (
-    <div className="w-full mx-auto space-y-4">
+    <div className="w-full max-w-xl mx-auto space-y-6 px-4">
       {posts.map((post) => (
         <div
-          key={post.id}
-          className="bg-white px-4 py-5 rounded-xl shadow-md border border-gray-200 hover:shadow-lg transition-shadow"
+          key={post._id}
+          className="bg-white px-5 py-4 rounded-xl shadow-sm border border-gray-200 hover:shadow-md transition-all"
         >
-          <div className="flex items-center justify-between text-base text-gray-500 mb-3">
-            <div className="flex items-center gap-3">
-              <Avatar
-                sx={{
-                  bgcolor: randomColor,
-                  width: 48,
-                  height: 48,
-                  fontSize: 20,
-                }}
-              >
-                {post.author[0].toUpperCase()}
-              </Avatar>
-              <span className="font-medium text-gray-600">@{post.author}</span>
+          <div className="flex items-start gap-3">
+            <Avatar
+              src={post.postAuthor.profilePic || ""}
+              sx={{
+                bgcolor: post.postAuthor.profilePic
+                  ? "transparent"
+                  : randomColor,
+                width: 40,
+                height: 40,
+                fontSize: 16,
+              }}
+            >
+              {!post.postAuthor.profilePic &&
+                post.postAuthor.name?.[0]?.toUpperCase()}
+            </Avatar>
+
+            <div className="flex-1">
+              <div className="flex items-center justify-between">
+                <span className="font-medium text-sm text-gray-800">
+                  {post.postAuthor.name}
+                </span>
+                <span className="text-xs text-gray-500">
+                  {formatDistanceToNow(new Date(post.createdAt), {
+                    addSuffix: true,
+                  })}
+                </span>
+              </div>
+
+              <p className="mt-1 text-sm text-gray-700 whitespace-pre-wrap">
+                {post.postTitle}
+              </p>
+
+              {post.postImage && (
+                <img
+                  src={post.postImage}
+                  alt="Post"
+                  className="rounded-lg mt-3 w-full max-h-56 object-cover border border-gray-100"
+                />
+              )}
+
+              <div className="flex items-center text-sm text-gray-500 mt-2">
+                <IoIosHeartEmpty size={20} className="text-red-500 mr-2" />
+                <span>0 likes</span>
+              </div>
             </div>
-            <span className="text-sm text-gray-400">
-              {formatDistanceToNow(new Date(post.postedAt), { addSuffix: true })}
-            </span>
-          </div>
-
-          <p className="text-gray-700 mb-3 whitespace-pre-wrap text-lg leading-relaxed">
-            {post.tweet}
-          </p>
-
-          <div className="flex items-center text-sm text-gray-500">
-            <IoIosHeartEmpty size={22} className="text-red-500 mr-2" />
-            <span>{post.likes}</span>
           </div>
         </div>
       ))}
