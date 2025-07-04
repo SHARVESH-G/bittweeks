@@ -33,7 +33,7 @@ function DigitalClock() {
   }
 
   return (
-    <div className="flex items-center justify-center gap-3 py-3 border-b border-gray-300">
+    <div className="flex items-center justify-center gap-3 py-3 border-b border-gray-300 select-none">
       <FiClock className="text-gray-700" size={30} />
       <div className="text-center">
         <h2 className="text-sm font-medium">{time}</h2>
