@@ -1,14 +1,23 @@
 import { Avatar, Button } from "@mui/material";
 import { DeptCodeFetcher } from "../../../helper/deptToDeptCode";
 import { randomColor } from "../../../datas/colors";
+import { useRef } from "react";
 
 const UserCard = ({ user }) => {
+  const usersColors = useRef({})
   return (
     <div className="bg-white cursor rounded-2xl p-4 shadow-sm hover:shadow-md transition-all duration-200 flex flex-col items-center text-center gap-2 border border-[var(--colorPrimary)] border-0.5">
       <Avatar
         src={user.profilePic || ""}
         sx={{
-          bgcolor: user.profilePic ? "transparent" : randomColor,
+          bgcolor: (()=>{
+            const id = user._id
+            if(!usersColors.current[id])
+            {
+              usersColors.current[id] = randomColor()
+            }
+            return usersColors.current[id]
+          })(),
           width: 60,
           height: 60,
           fontSize: 22,

@@ -31,6 +31,7 @@ const UserList = () => {
           className="w-full px-4 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--colorPrimary)]"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
+          autoComplete="off"
         />
       </div>
 

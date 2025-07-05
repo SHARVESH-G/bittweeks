@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Avatar } from "@mui/material";
 import { Link } from "react-router-dom";
 import useFetchData from "../../hooks/userFetchData";
@@ -19,7 +19,7 @@ const RecommendedUser = () => {
   const { data, loading, error } = useFetchData("/api/users");
   const allUsers = data?.users || [];
   const [recommendedUsers, setRecommendedUsers] = useState([]);
-
+  const currentColors = useRef({})
   useEffect(() => {
     if (allUsers.length > 0) {
       setRecommendedUsers(getRandomUsers(allUsers, 3));
@@ -53,7 +53,13 @@ const RecommendedUser = () => {
                 <div className="flex items-center gap-3 flex-wrap">
                   <Avatar
                     sx={{
-                      bgcolor: randomColor(),
+                      bgcolor: (()=>{
+                        const id = user._id
+                        if(!currentColors.current[id]){
+                          currentColors.current[id] = randomColor();
+                        }
+                        return currentColors.current[id]
+                      })(),
                       width: 32,
                       height: 32,
                       fontSize: 14,

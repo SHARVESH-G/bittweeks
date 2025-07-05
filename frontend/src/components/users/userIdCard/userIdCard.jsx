@@ -8,8 +8,8 @@ const UserIdCard = () => {
     <div className="flex items-center justify-center gap-3 py-3 border-b border-gray-300 select-none">
       {
         currentUser.profilePic 
-                    ? <Avatar sx={{ width: 30, height: 30, fontSize: 14 }} src={currentUser.profilePic}/>
-                    : <Avatar sx={{ width: 30, height: 30, fontSize: 14 }}>{currentUser.name.slice(0,1).toUpperCase()}</Avatar>
+                    ? <Avatar sx={{ width: 30, height: 30, fontSize: 14 , border:'2px solid var(--colorPrimary)' }} src={currentUser.profilePic}/>
+                    : <Avatar sx={{ width: 30, height: 30, fontSize: 14 , border:'2px solid var(--colorPrimary)' }}>{currentUser.name.slice(0,1).toUpperCase()}</Avatar>
       }
       <div className="text-center">
         <div className='flex items-center justify-between '>

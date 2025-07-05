@@ -117,7 +117,7 @@ function PostTweek() {
 
               <div className="flex items-center text-sm text-gray-500 mt-3">
                 {post.postLikes.includes(currentUserId) ? (
-                  <IoIosHeart
+                   <IoIosHeart
                     size={22}
                     className="text-red-500 cursor-pointer mr-2"
                     onClick={() => handleLike(post._id)}
