@@ -11,9 +11,11 @@ import { loggedInUser } from "../../hooks/loggedInUser";
 function PostTweek() {
   const currentUser = loggedInUser();
   const currentUserId = currentUser._id;
-  const { data, loading, error } = useFetchData(`/api/getallpost?userId=${currentUserId}`);
+  const { data, loading, error } = useFetchData(`/api/getallpost`);
   const [posts, setPosts] = useState([]);
   const currentAvatarColor = useRef({});
+
+  
 
   useEffect(() => {
     if (data?.posts) {
@@ -64,10 +66,12 @@ function PostTweek() {
 
   return (
     <div className="w-full max-w-[95%] sm:max-w-xl md:max-w-2xl lg:max-w-3xl mx-auto space-y-6 px-2 sm:px-4">
-      {posts.map((post) => (
+      {posts.map((post) =>{ 
+        const isFollowing = post.postAuthor.allFollowers.some(id=>id === currentUserId)
+        return(
         <div
           key={post._id}
-          className="bg-white px-4 sm:px-5 py-4 rounded-xl shadow-sm border border-gray-200 hover:shadow-md transition-all"
+          className={`bg-white px-4 sm:px-5 py-4 rounded-xl border-2 shadow-sm border hover:shadow-md transition-all ${isFollowing ?`border-[var(--colorPrimary)]`: `border-gray-200`}`}
         >
           <div className="flex items-start gap-3">
             <Avatar
@@ -134,7 +138,7 @@ function PostTweek() {
             </div>
           </div>
         </div>
-      ))}
+      )})}
     </div>
   );
 }

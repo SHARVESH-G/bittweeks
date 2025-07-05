@@ -22,7 +22,7 @@ const addNewPost = async (req, res) => {
 const fetchAllPost = async (req, res) => {
   try {
     const posts = await Post.find({})
-      .populate('postAuthor', 'name email department profilePic')
+      .populate('postAuthor', 'name email department profilePic allFollowers')
       .sort({ createdAt: -1 });
 
     return res.status(200).json({ posts });
