@@ -1,8 +1,9 @@
 import express from 'express';
-import {getAllUsers } from '../controller/fetchAllUsersControllers.js';
+import {getAllUsers , toogleFollownUnfollow } from '../controller/fetchAllUsersControllers.js';
 
 const router = express.Router();
 
 router.get("/users", getAllUsers);
+router.post('/userfolloe/:userId' , toogleFollownUnfollow);
 
 export default router;
