@@ -7,7 +7,7 @@ import { randomColor } from "../../../datas/colors";
 const UserCardModel = ({selectedUser , setSelectedUser }) =>{
     return(
         <div
-          className="fixed inset-0 bg-none bg-opacity-40 flex items-center justify-center z-50"
+          className="fixed inset-0 bg-[var(--colorPrimaryTernary)]/30 flex items-center justify-center z-50"
           onClick={() => setSelectedUser(null)}
         >
           <div
