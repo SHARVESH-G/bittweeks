@@ -1,6 +1,6 @@
 import { Avatar, Button } from "@mui/material";
+import { DeptCodeFetcher } from "../../../helper/deptToDeptCode";
 import { randomColor } from "../../../datas/colors";
-
 
 const UserCard = ({ user }) => {
   return (
@@ -22,7 +22,7 @@ const UserCard = ({ user }) => {
         <p className="text-xs text-gray-500">{user.email}</p>
         <p className="text-xs text-gray-500 mt-2">Followers : {user.followers}</p>
         <span className="mt-1 text-[10px] text-[var(--colorPrimary)] bg-gray-100 border border-[var(--colorPrimary)] px-2 py-[2px] rounded-full">
-          {user.department.toUpperCase()}
+          {DeptCodeFetcher(user.department.toUpperCase())}
         </span>
       </div>
 

@@ -50,7 +50,7 @@ const Login = () => {
 
     } catch (err) {
       const msg = err.response?.data?.message || 'Login failed!';
-      toast.error(res.json.message, {
+      toast.error(msg, {
         position: 'top-center',
         autoClose: 3000,
         theme: 'colored',
