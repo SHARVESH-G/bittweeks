@@ -20,6 +20,7 @@ const RecommendedUser = () => {
   const allUsers = data?.users || [];
   const [recommendedUsers, setRecommendedUsers] = useState([]);
   const currentColors = useRef({})
+  
   useEffect(() => {
     if (allUsers.length > 0) {
       setRecommendedUsers(getRandomUsers(allUsers, 3));
