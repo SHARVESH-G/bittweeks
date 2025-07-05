@@ -3,17 +3,20 @@ import { formatDistanceToNow } from "date-fns";
 import { IoIosHeart, IoIosHeartEmpty } from "react-icons/io";
 import Avatar from "@mui/material/Avatar";
 import { MoonLoader } from "react-spinners";
-import { highlightHashtags } from "../../helper/highlightHashTags";
+import { highlightHashtags } from "../../he lper/highlightHashTags";
 import { randomColor } from "../../datas/colors";
 import useFetchData from "../../hooks/userFetchData";
 import { loggedInUser } from "../../hooks/loggedInUser";
+import { useRef } from "react";
+
+
+
 function PostTweek() {
   const currentUser = loggedInUser();
   const currentUserId = currentUser._id;
-  const { data, loading, error } = useFetchData(
-    `/api/getallpost?userId=${currentUserId}`
-  );
+  const { data, loading, error } = useFetchData(`/api/getallpost?userId=${currentUserId}`);
   const [posts, setPosts] = useState([]);
+  const currentAvatarColor = useRef({});
 
   useEffect(() => {
     if (data?.posts) {
@@ -74,7 +77,14 @@ function PostTweek() {
               sx={{
                 bgcolor: post.postAuthor.profilePic
                   ? "transparent"
-                  : randomColor,
+                  : (()=>{
+                    const id = post.postAuthor._id;
+                    if(!currentAvatarColor.current[id])
+                    {
+                      currentAvatarColor.current[id] = randomColor()
+                    }
+                    return currentAvatarColor.current[id]
+                  }),
                 width: 50,
                 height: 50,
                 fontSize: 25,
