@@ -71,7 +71,7 @@ function PostTweek() {
         return(
         <div
           key={post._id}
-          className={`bg-white px-4 sm:px-5 py-4 rounded-xl border-2 shadow-sm border hover:shadow-md transition-all ${isFollowing ?`border-[var(--colorPrimary)]`: `border-gray-200`}`}
+          className={`bg-white px-4 sm:px-5 py-4 rounded-xl border-2 shadow-sm hover:shadow-md transition-all ${isFollowing ?`border-[var(--colorPrimary)]`: `border-gray-200`}`}
         >
           <div className="flex items-start gap-3">
             <Avatar
