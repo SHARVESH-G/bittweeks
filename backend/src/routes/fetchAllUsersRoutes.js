@@ -4,6 +4,6 @@ import {getAllUsers , toogleFollownUnfollow } from '../controller/fetchAllUsersC
 const router = express.Router();
 
 router.get("/users", getAllUsers);
-router.post('/userfolloe/:userId' , toogleFollownUnfollow);
+router.post('/userfollow/:followedUserId' , toogleFollownUnfollow);
 
 export default router;

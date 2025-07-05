@@ -46,7 +46,6 @@ const UserList = () => {
           {filteredUsers.map((user) => (
             <div
               key={user._id}
-              onClick={() => setSelectedUser(user)}
               className="cursor-pointer"
             >
               <UserCard user={user} />

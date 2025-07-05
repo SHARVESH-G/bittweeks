@@ -52,7 +52,8 @@ const login = async (req, res) => {
                 email: fetchedUser.email,
                 department: fetchedUser.department,
                 profilePic:fetchedUser.profilePic,
-                followers:fetchedUser.followers
+                followers:fetchedUser.allFollowers.length,
+                joined : fetchedUser.createdAt
             }
         });
 

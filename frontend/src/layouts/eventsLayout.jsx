@@ -13,13 +13,13 @@ const EventsLayout = () => {
       <div className="mb-4 space-x-4 flex">
         <Link
           to="/events"
-          class="mt-2 p-2 text-xs font-bold bg-[var(--colorPrimary)] border-2 text-white flex w-fit items-center gap-2"
+          className="mt-2 p-2 text-xs font-bold bg-[var(--colorPrimary)] border-2 text-white flex w-fit items-center gap-2"
         >
           <MdDensitySmall/> All Events
         </Link>
         <Link
           to="/events/add"
-          class="mt-2 p-2 text-xs font-bold bg-[var(--colorPrimary)] border-2 text-white flex w-fit items-center gap-2"
+          className="mt-2 p-2 text-xs font-bold bg-[var(--colorPrimary)] border-2 text-white flex w-fit items-center gap-2"
         >
           <IoIosAddCircle size={20}/> Add Event
         </Link>

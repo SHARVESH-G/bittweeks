@@ -9,12 +9,12 @@ const getAllUsers = async (req, res) => {
     }
 };
 
-const toogleFollownUnfollow = async(req,res)=>{
+const toogleFollownUnfollow = async(req,res)=>{ 
     try{
         const currentUser= req.body.currentUser;
         const { followedUserId } = req.params
 
-        const user = await User.findOne({_id:followedUserId});
+        const user = await User.findById(followedUserId);
         if(!user){
             return res.status(404).json({message:"User not Found"})
         }
@@ -30,7 +30,7 @@ const toogleFollownUnfollow = async(req,res)=>{
         res.status(200).json({
             followed:!followed,
             followers:user.allFollowers.length,
-            updatedFollowers : user.followers
+            allFollowers:user.allFollowers
         })
     }catch(err){
         return res.status(500).json({message:"Something Went Wrong"})
