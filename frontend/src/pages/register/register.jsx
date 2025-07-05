@@ -8,6 +8,8 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast, Bounce } from "react-toastify";
 import ImageToBase64 from "../../helper/ImageToBase";
+import { isBitEmail } from "../../helper/isBitEmail";
+
 
 const Register = () => {
   const [name, setname] = useState("");
@@ -57,6 +59,17 @@ const Register = () => {
         theme: "colored",
         transition: Bounce,
       });
+      return;
+    }
+
+    if(!isBitEmail(email))
+    {
+      toast.error("You are not from BIT Organisaion", {
+          position: "top-center",
+          autoClose: 3000,
+          theme: "colored",
+          transition: Bounce,
+        });
       return;
     }
 
