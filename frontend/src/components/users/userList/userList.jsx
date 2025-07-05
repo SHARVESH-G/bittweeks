@@ -2,21 +2,24 @@ import useFetchData from "../../../hooks/userFetchData";
 import UserCard from "../userCard/userCard";
 import { useState } from "react";
 import { MoonLoader } from "react-spinners";
+import UserCardModel from "../userModel/userModel";
+
 
 const UserList = () => {
   const [search, setSearch] = useState("");
+  const [selectedUser, setSelectedUser] = useState(null);
   const { data, loading, error } = useFetchData("/api/users");
   const users = data?.users || [];
 
   const filteredUsers = users.filter(
     (user) =>
-      user.name.toLowerCase().includes(search.toLowerCase())   ||
+      user.name.toLowerCase().includes(search.toLowerCase()) ||
       user.email.toLowerCase().includes(search.toLowerCase()) ||
       user.department.toLowerCase().includes(search.toLowerCase())
   );
 
   return (
-    <div className="min-h-screen bg-gray-50 py-8 px-4 sm:px-6 lg:px-12">
+    <div className="min-h-screen bg-gray-50 py-8 px-4 sm:px-6 lg:px-12 relative">
       <h1 className="text-2xl md:text-3xl font-semibold text-gray-800 mb-6 text-center">
         All Users
       </h1>
@@ -38,11 +41,21 @@ const UserList = () => {
       ) : error ? (
         <p className="text-center text-red-500">{error}</p>
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
           {filteredUsers.map((user) => (
-            <UserCard key={user._id} user={user} />
+            <div
+              key={user._id}
+              onClick={() => setSelectedUser(user)}
+              className="cursor-pointer"
+            >
+              <UserCard user={user} />
+            </div>
           ))}
         </div>
+      )}
+
+      {selectedUser && (
+        <UserCardModel selectedUser={selectedUser} setSelectedUser={setSelectedUser}/>
       )}
     </div>
   );

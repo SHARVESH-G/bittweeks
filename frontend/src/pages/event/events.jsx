@@ -13,7 +13,7 @@ const Event = () => {
     {
       eventName: 'Crayon-D',
       description: 'Company Handson Training',
-      date: '2025-09-05',
+      date: '2024-09-05',
       venue: 'Delhi Tech Hub',
       image: 'https://placehold.co/600x400?text=Open+Blog+Meet',
     },

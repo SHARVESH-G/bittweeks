@@ -4,7 +4,7 @@ import { randomColor } from "../../../datas/colors";
 
 const UserCard = ({ user }) => {
   return (
-    <div className="bg-white rounded-2xl p-4 shadow-sm hover:shadow-md transition-all duration-200 flex flex-col items-center text-center gap-2 border border-[var(--colorPrimary)] border-0.5">
+    <div className="bg-white cursor rounded-2xl p-4 shadow-sm hover:shadow-md transition-all duration-200 flex flex-col items-center text-center gap-2 border border-[var(--colorPrimary)] border-0.5">
       <Avatar
         src={user.profilePic || ""}
         sx={{

@@ -13,7 +13,7 @@ const AddEvent = () => {
     if (file) {
       const reader = new FileReader();
       reader.onloadend = () => {
-        setImage(reader.result); // base64 string
+        setImage(reader.result);
         setPreview(reader.result);
       };
       reader.readAsDataURL(file);
