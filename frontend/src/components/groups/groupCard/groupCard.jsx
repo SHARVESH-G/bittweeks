@@ -11,6 +11,7 @@ const GroupCard = ({ group }) => {
           height: 56,
           fontSize: 24,
           mb: 1,
+          objectFit:'contain',
         }}
       >
         {group.name.charAt(0)}
