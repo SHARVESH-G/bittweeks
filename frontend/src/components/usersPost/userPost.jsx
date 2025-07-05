@@ -2,6 +2,8 @@ import { formatDistanceToNow } from "date-fns";
 import { IoIosHeartEmpty } from "react-icons/io";
 import Avatar from "@mui/material/Avatar";
 import { randomColor } from "../../datas/colors";
+import { highlightHashtags } from "../../helper/highlightHashTags";
+
 
 const UserPost = ({post}) => {
   return (
@@ -36,7 +38,7 @@ const UserPost = ({post}) => {
           </div>
 
           <p className="mt-1 text-sm text-gray-700 whitespace-pre-wrap">
-            {post.postTitle}
+            {highlightHashtags(post.postTitle)}
           </p>
 
           {post.postImage && (
