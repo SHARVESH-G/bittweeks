@@ -1,14 +1,51 @@
+import { useEffect, useState } from "react";
 import { formatDistanceToNow } from "date-fns";
-import { IoIosHeartEmpty } from "react-icons/io";
+import { IoIosHeart, IoIosHeartEmpty } from "react-icons/io";
 import Avatar from "@mui/material/Avatar";
-import useFetchData from "../../hooks/userFetchData";
-import { randomColor } from "../../datas/colors";
 import { MoonLoader } from "react-spinners";
 import { highlightHashtags } from "../../helper/highlightHashTags";
-
+import { randomColor } from "../../datas/colors";
+import useFetchData from "../../hooks/userFetchData";
+import { loggedInUser } from "../../hooks/loggedInUser";
 function PostTweek() {
-  const { data, loading, error } = useFetchData("/api/getallpost");
-  const posts = data?.posts || [];
+  const currentUser = loggedInUser();
+  const currentUserId = currentUser._id;
+  const { data, loading, error } = useFetchData(
+    `/api/getallpost?userId=${currentUserId}`
+  );
+  const [posts, setPosts] = useState([]);
+
+  useEffect(() => {
+    if (data?.posts) {
+      setPosts(data.posts);
+    }
+  }, [data]);
+
+  const handleLike = async (postId) => {
+    try {
+      const res = await fetch(`http://localhost:3000/api/likepost/${postId}`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ userId: currentUserId }),
+      });
+
+      const result = await res.json();
+
+      setPosts((prevPosts) =>
+        prevPosts.map((post) =>
+          post._id === postId
+            ? {
+                ...post,
+                likeCount: result.likeCount,
+                likedByUser: result.liked,
+              }
+            : post
+        )
+      );
+    } catch (err) {
+      console.error("Failed to toggle like:", err);
+    }
+  };
 
   if (loading) {
     return (
@@ -20,9 +57,7 @@ function PostTweek() {
 
   if (error) {
     return (
-      <div className="text-center text-red-500 py-10 font-medium">
-        {error}
-      </div>
+      <div className="text-center text-red-500 py-10 font-medium">{error}</div>
     );
   }
 
@@ -74,8 +109,20 @@ function PostTweek() {
               )}
 
               <div className="flex items-center text-sm text-gray-500 mt-3">
-                <IoIosHeartEmpty size={20} className="text-red-500 mr-2" />
-                <span>0 likes</span>
+                {post.likedByUser ? (
+                  <IoIosHeart
+                    size={22}
+                    className="text-red-500 cursor-pointer mr-2"
+                    onClick={() => handleLike(post._id)}
+                  />
+                ) : (
+                  <IoIosHeartEmpty
+                    size={22}
+                    className="text-gray-500 cursor-pointer mr-2"
+                    onClick={() => handleLike(post._id)}
+                  />
+                )}
+                <span>{post.likeCount} likes</span>
               </div>
             </div>
           </div>

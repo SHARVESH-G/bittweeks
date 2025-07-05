@@ -45,4 +45,33 @@ const fetchUserPost = async(req,res)=>{
   }
 }
 
-export { addNewPost , fetchAllPost , fetchUserPost};
+
+const toggleLike = async (req, res) => {
+  try {
+    const { postId } = req.params;
+    const userId = req.body.userId;
+
+    const post = await Post.findById(postId);
+
+    if (!post) return res.status(404).json({ message: 'Post not found' });
+
+    const liked = post.postLikes.some(id => id.toString() === userId);
+
+    if (liked) {
+      post.postLikes = post.postLikes.filter(id => id.toString() !== userId);
+    } else {
+      post.postLikes.push(userId);
+    }
+
+    await post.save();
+
+    res.status(200).json({
+      liked: !liked,
+      likeCount: post.postLikes.length,
+    });
+  } catch (err) {
+    res.status(500).json({ message: 'Something went wrong' });
+  }
+};
+
+export { addNewPost , fetchAllPost , fetchUserPost , toggleLike};
