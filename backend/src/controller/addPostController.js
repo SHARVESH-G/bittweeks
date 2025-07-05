@@ -68,10 +68,12 @@ const toggleLike = async (req, res) => {
     res.status(200).json({
       liked: !liked,
       likeCount: post.postLikes.length,
+      updatedLikes: post.postLikes
     });
   } catch (err) {
     res.status(500).json({ message: 'Something went wrong' });
   }
 };
+
 
 export { addNewPost , fetchAllPost , fetchUserPost , toggleLike};

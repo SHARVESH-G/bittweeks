@@ -1,15 +1,12 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { formatDistanceToNow } from "date-fns";
 import { IoIosHeart, IoIosHeartEmpty } from "react-icons/io";
 import Avatar from "@mui/material/Avatar";
 import { MoonLoader } from "react-spinners";
-import { highlightHashtags } from "../../he lper/highlightHashTags";
+import { highlightHashtags } from "../../helper/highlightHashTags";
 import { randomColor } from "../../datas/colors";
 import useFetchData from "../../hooks/userFetchData";
 import { loggedInUser } from "../../hooks/loggedInUser";
-import { useRef } from "react";
-
-
 
 function PostTweek() {
   const currentUser = loggedInUser();
@@ -39,8 +36,9 @@ function PostTweek() {
           post._id === postId
             ? {
                 ...post,
-                likeCount: result.likeCount,
-                likedByUser: result.liked,
+                postLikes: post.postLikes.includes(currentUserId)
+                  ? post.postLikes.filter((id) => id !== currentUserId)
+                  : [...post.postLikes, currentUserId],
               }
             : post
         )
@@ -77,14 +75,13 @@ function PostTweek() {
               sx={{
                 bgcolor: post.postAuthor.profilePic
                   ? "transparent"
-                  : (()=>{
-                    const id = post.postAuthor._id;
-                    if(!currentAvatarColor.current[id])
-                    {
-                      currentAvatarColor.current[id] = randomColor()
-                    }
-                    return currentAvatarColor.current[id]
-                  }),
+                  : (() => {
+                      const id = post.postAuthor._id;
+                      if (!currentAvatarColor.current[id]) {
+                        currentAvatarColor.current[id] = randomColor();
+                      }
+                      return currentAvatarColor.current[id];
+                    })(),
                 width: 50,
                 height: 50,
                 fontSize: 25,
@@ -119,7 +116,7 @@ function PostTweek() {
               )}
 
               <div className="flex items-center text-sm text-gray-500 mt-3">
-                {post.likedByUser ? (
+                {post.postLikes.includes(currentUserId) ? (
                   <IoIosHeart
                     size={22}
                     className="text-red-500 cursor-pointer mr-2"
@@ -132,7 +129,7 @@ function PostTweek() {
                     onClick={() => handleLike(post._id)}
                   />
                 )}
-                <span>{post.likeCount} likes</span>
+                <span>{post.postLikes.length} likes</span>
               </div>
             </div>
           </div>

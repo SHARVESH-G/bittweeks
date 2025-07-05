@@ -12,9 +12,7 @@ const MyPost = () => {
   const [search, setSearch] = useState("");
 
   const { _id: userId } = loggedInUser();
-  const { data, loading, error } = useFetchData(
-    `/api/myposts?userId=${userId}`
-  );
+  const { data, loading, error } = useFetchData(`/api/myposts?userId=${userId}`);
   const myPosts = data?.userPosts || [];
 
   if (loading) {

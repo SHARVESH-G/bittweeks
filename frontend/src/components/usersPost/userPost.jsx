@@ -50,8 +50,7 @@ const UserPost = ({post}) => {
           )}
 
           <div className="flex items-center text-sm text-gray-500 mt-2">
-            <IoIosHeartEmpty size={20} className="text-red-500 mr-2" />
-            <span>0 likes</span>
+            <span>{post.postLikes.length} Likes</span>
           </div>
         </div>
       </div>
