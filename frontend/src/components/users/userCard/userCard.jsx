@@ -3,7 +3,7 @@ import { DeptCodeFetcher } from "../../../helper/deptToDeptCode";
 import { randomColor } from "../../../datas/colors";
 import { useRef, useState } from "react";
 import { loggedInUser } from "../../../hooks/loggedInUser";
-import { handleFollowing } from "../../../hooks/handleFollowing";
+import { useHandleFollowing } from "../../../hooks/handleFollowing";
 
 
 const UserCard = ({ user }) => {
@@ -58,7 +58,7 @@ const UserCard = ({ user }) => {
           color: displayUser.followed ? "red" : "var(--colorPrimary)",
           borderColor: displayUser.followed ? "red" : "var(--colorPrimary)",
         }}
-        onClick={() => handleFollowing({ user: displayUser, currentUserId: currentUser._id, setUserState: setThisUser })}
+        onClick={() => useHandleFollowing ({ user: displayUser, currentUserId: currentUser._id, setUserState: setThisUser })}
       >
         {currentUser._id === displayUser._id ? "YOU" : displayUser.followed ? "Unfollow" : "Follow"}
       </Button>

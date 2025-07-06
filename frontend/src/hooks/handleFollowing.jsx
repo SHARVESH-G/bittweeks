@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const handleFollowing = async ({ user, currentUserId, setUserState }) => {
+export const useHandleFollowing = async ({ user, currentUserId, setUserState }) => {
   if (user._id === currentUserId) return;
 
   try {

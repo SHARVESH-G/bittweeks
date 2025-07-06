@@ -3,9 +3,9 @@ import { Avatar } from "@mui/material";
 import { Link } from "react-router-dom";
 import useFetchData from "../../hooks/userFetchData";
 import CustomChip from "../ui/chip/chip";
-import { randomColor } from "../../datas/colors";
 import { MoonLoader } from "react-spinners";
 import { loggedInUser } from "../../hooks/loggedInUser";
+import RecommendedUserCard from "./recommendedUserCard";
 
 
 
@@ -19,7 +19,6 @@ const RecommendedUser = () => {
   const { data, loading, error } = useFetchData("/api/users");
   const allUsers = data?.users || [];
   const [recommendedUsers, setRecommendedUsers] = useState([]);
-  const currentColors = useRef({})
   
   useEffect(() => {
     if (allUsers.length > 0) {
@@ -46,52 +45,8 @@ const RecommendedUser = () => {
       ) : (
         <>
           <ul className="space-y-3">
-            {recommendedUsers.map((user, index) => (
-              <li
-                key={user._id + "-" + index}
-                className="flex items-center justify-between"
-              >
-                <div className="flex items-center gap-3 flex-wrap">
-                  <Avatar
-                    sx={{
-                      bgcolor: (()=>{
-                        const id = user._id
-                        if(!currentColors.current[id]){
-                          currentColors.current[id] = randomColor();
-                        }
-                        return currentColors.current[id]
-                      })(),
-                      width: 32,
-                      height: 32,
-                      fontSize: 14,
-                    }}
-                    src={user.profilePic || ""}
-                  >
-                    {!user.profilePic && user.name.charAt(0)}
-                  </Avatar>
-
-                  <div className="text-xs">
-                    <div className="flex gap-6">
-                      <p className="font-medium">{user.name}</p>
-                      {user.department === currentUser.department && (
-                        <CustomChip
-                          text="Your Dept"
-                          bgcolor="var(--colorPrimaryTernary)"
-                          color="white"
-                        />
-                      )}
-                    </div>
-                    <p className="text-[var(--colorPrimaryHover)]">
-                      {user.email}
-                    </p>
-                  </div>
-
-                  
-                </div>
-                <button className="text-xs bg-[var(--colorPrimary)] hover:bg-[var(--colorPrimaryHover)] text-white px-2 py-1 rounded-md">
-                  Follow
-                </button>
-              </li>
+            {recommendedUsers.map((user) => (
+              <RecommendedUserCard user={user}  key={user._id}  />
             ))}
           </ul>
 
