@@ -4,10 +4,12 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
 import GroupList from '../../components/groups/groupList/groupList';
-import CreateCommunity from '../../components/groups/createGroup/createGroup';
+import CreateRequest from '../../components/groups/createRequest/createRequest';
 
 function CustomTabPanel(props) {
   const { children, value, index, ...other } = props;
+
+  
 
   return (
     <div
@@ -27,14 +29,6 @@ CustomTabPanel.propTypes = {
   index: PropTypes.number.isRequired,
   value: PropTypes.number.isRequired,
 };
-
-function a11yProps(index) {
-  return {
-    id: `simple-tab-${index}`,
-    'aria-controls': `simple-tabpanel-${index}`,
-  };
-}
-
 export default function BasicTabs() {
   const [value, setValue] = React.useState(0);
 
@@ -44,9 +38,10 @@ export default function BasicTabs() {
 
   return (
     <Box sx={{ width: '100%'}}>
-      <Box sx={{ borderBottom: 1, border: 'none'}} >
+      <Box sx={{ borderBottom: 1, border: 'none' }} >
         <Tabs value={value} onChange={handleChange}  >
-          <Tab label="All Requests"  sx={{color:'var(--colorPrimary)' , fontWeight:'800'}} />
+          <Tab label="Found Requests"  sx={{color:'var(--colorPrimary)' , fontWeight:'800'}} />
+          <Tab label="Lost Requests"  sx={{color:'var(--colorPrimary)' , fontWeight:'800'}} />
           <Tab label="Your Requests"  sx={{color:'var(--colorPrimary)' , fontWeight:'800'}} />
           <Tab label="Post A Request" sx={{color:'var(--colorPrimary)' , fontWeight:'800'}} />
         </Tabs>
@@ -58,7 +53,10 @@ export default function BasicTabs() {
         Requests
       </CustomTabPanel>
       <CustomTabPanel value={value} index={2}>
-         <CreateCommunity />
+        Your Request
+      </CustomTabPanel>
+      <CustomTabPanel value={value} index={3}>
+         <CreateRequest />
       </CustomTabPanel>
     </Box>
   );
