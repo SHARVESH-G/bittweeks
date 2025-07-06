@@ -9,7 +9,7 @@ const AddEvent = () => {
   const [eventName, setEventName] = useState("");
   const [description, setDescription] = useState("");
   const [date, setDate] = useState("");
-  const [venue, setVenue] = useState("");
+  const [venue, setVenue] = useState(null);
   const [image, setImage] = useState(null);
   const [preview, setPreview] = useState(null);
   const currentUser = loggedInUser()._id;

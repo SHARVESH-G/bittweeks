@@ -8,7 +8,6 @@ const EventSchema = new mongoose.Schema(
     },
     description: {
       type: String,
-      required: true,
     },
     eventDate: {
       type: Date,
@@ -16,7 +15,7 @@ const EventSchema = new mongoose.Schema(
     },
     venue: {
       type: String,
-      required: true,
+      default:"College"
     },
     image: {
       type: String,
