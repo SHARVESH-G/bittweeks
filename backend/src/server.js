@@ -8,7 +8,7 @@ import authRoutes from './routes/authRoutes.js'
 import fetchAllUsers from './routes/fetchAllUsersRoutes.js'
 import addNewPost from './routes/addNewPostRoutes.js'
 import eventRouter from './routes/eventRoutes.js'
-
+import lostfoundRouter from './routes/lostfoundRoutes.js'
 
 const PORT = process.env.PORT
 const server = express();
@@ -30,3 +30,4 @@ server.use('/api/auth', authRoutes);
 server.use('/api', fetchAllUsers);
 server.use('/api', addNewPost);
 server.use('/api', eventRouter);
+server.use('/api', lostfoundRouter);

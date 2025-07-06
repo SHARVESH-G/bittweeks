@@ -18,7 +18,6 @@ const LostFoundSchema = new mongoose.Schema(
         },
         reqPlace:{
             type:String,
-            required:true,
             trim:true
         },
         reqImage:{

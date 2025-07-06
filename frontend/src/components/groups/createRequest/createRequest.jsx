@@ -1,4 +1,7 @@
 import React, { useState } from "react";
+import postNewDataToDB from "../../../hooks/postData";
+import { Bounce, ToastContainer, toast } from "react-toastify";
+import { loggedInUser } from "../../../hooks/loggedInUser";
 
 const CreateRequest = () => {
   const [reqTitle, setReqTitle] = useState("");
@@ -7,7 +10,7 @@ const CreateRequest = () => {
   const [place , setPlace] = useState("")
   const [image, setImage] = useState(null);
   const [preview, setPreview] = useState(null);
-
+  const currentUserId = loggedInUser()._id;
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     if (file) {
@@ -20,12 +23,62 @@ const CreateRequest = () => {
     }
   };
 
-  const handleCreate = () => {
-    alert("Request Created!");
-  };
+  const handleCreate =async () => {
+    if(!reqTitle || !reqType || !contactInfo){
+      return toast.warn('All fields Are Required', {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        transition: Bounce,
+      });
+    }
+    try{
+      const formData = {reqTitle,reqType,reqContactInfo: contactInfo,reqPlace: place,reqImage: image,reqAuthor: currentUserId,};
+      const response = await postNewDataToDB('/api/newlostfoundreq' , formData)
+      if(response.status  === 200){
+              toast.success("Event posted successfully!", {
+                position: "top-center",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: false,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+                transition: Bounce,
+              });
+              setReqTitle("");
+              setReqType("lost");
+              setContactInfo("");
+              setPlace("");
+              setImage(null);
+              setImage(null);
+              return;
+      }
+    }
+    catch(err){
+      toast.error(err.message || "Something Went Wrong", {
+              position: "top-center",
+              autoClose: 5000,
+              hideProgressBar: false,
+              closeOnClick: false,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "light",
+              transition: Bounce,
+            });
+    }
+  }
 
   return (
     <div className="flex justify-center mt-10">
+      <ToastContainer/>
       <div className="w-full max-w-md bg-white p-6 rounded-2xl shadow-md">
         <h2 className="text-xl font-bold mb-4 text-[var(--colorPrimary)]">
           Create Request
