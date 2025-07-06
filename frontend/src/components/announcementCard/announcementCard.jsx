@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-const QuoteCard = () => {
+const AnnouncementCard = () => {
   const [quote, setQuote] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -23,4 +23,4 @@ const QuoteCard = () => {
   );
 };
 
-export default QuoteCard;
+export default AnnouncementCard;
