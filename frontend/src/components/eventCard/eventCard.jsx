@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import {loggedInUser} from '../../hooks/loggedInUser'
+import collegeLogo from '../../assets/images/collegeLogo.png'
 
 const EventCard = ({ eventName, description, date, image, venue , author ,authorProfilePic ,authorAfllFollowers }) => {
   const [countdown, setCountdown] = useState("");
@@ -33,10 +34,10 @@ const EventCard = ({ eventName, description, date, image, venue , author ,author
   }, [date]);
 
   return (
-    <div className="bg-white p-4 rounded-xl shadow-md w-full max-w-sm h-full flex flex-col">
-      {image && (
-        <img src={image} alt={eventName} className="w-full h-60 object-cover rounded-lg mb-3" />
-      )}
+    <div className={`bg-white p-4 rounded-xl shadow-md w-full max-w-sm h-full flex flex-col border-2 ${authorAfllFollowers?.includes(currentUserId) ? "border-[var(--colorPrimary)]" : "border-gray-200"} `}>
+      {image 
+        ? <img src={image} alt={eventName} className="w-full h-60 object-contain rounded-lg mb-3" /> 
+        : <img src={collegeLogo} alt={eventName} className="w-full h-60 object-contain rounded-lg mb-3" />  }
       <h2 className={`text-xl font-bold text-[var(--colorPrimary)] ${timeDiff <= 0 ? "line-through" : ""}`}>
         {eventName} by {author}
       </h2>

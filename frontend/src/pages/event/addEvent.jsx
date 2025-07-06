@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import ImageToBase64 from "../../helper/ImageToBase";
 import { loggedInUser } from "../../hooks/loggedInUser";
 import { Bounce, ToastContainer, toast } from "react-toastify";
+import postNewDataToDB from '../../hooks/postData'
+
+
 const AddEvent = () => {
   const [eventName, setEventName] = useState("");
   const [description, setDescription] = useState("");
@@ -21,7 +24,7 @@ const AddEvent = () => {
   };
 
   const handleSubmit =async () => {
-    if(!date || !eventData || !eventName)
+    if(!date || !eventName)
     {
       return toast.warn('All fields Are Required', {
         position: "top-center",

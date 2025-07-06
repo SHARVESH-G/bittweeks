@@ -8,3 +8,5 @@ const postNewDataToDB = async(path , data)=>{
         throw err;
     }
 }
+
+export default postNewDataToDB;

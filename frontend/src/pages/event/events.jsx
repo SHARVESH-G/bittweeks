@@ -8,8 +8,8 @@ const Event = () => {
   const [allEvents, setAllEvents] = useState([]);
 
   useEffect(() => {
-    if (data?.events) {
-      setAllEvents(data.events);
+    if (data?.fetchedEvents) {
+      setAllEvents(data.fetchedEvents);
     }
   }, [data]);
 
@@ -32,9 +32,9 @@ const Event = () => {
   return (
     <div className="mt-10 px-4">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-2 place-items-center">
-        {allEvents.map((event, index) => (
+        {allEvents.length===0?(<h2>No Upcomming Events</h2>) :(allEvents.map((event, index) => (
           <EventCard
-            key={index}
+            key={event._id}
             eventName={event.eventName}
             description={event.description}
             date={event.eventDate}
@@ -44,7 +44,7 @@ const Event = () => {
             authorProfilePic = {event.author.profilePic}
             authorAfllFollowers = {event.author.allFollowers}
           />
-        ))}
+        )))}
       </div>
     </div>
   );

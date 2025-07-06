@@ -2,7 +2,7 @@ import { Event } from "../models/Event.js";
 
 const addEvent = async (req, res) => {
     try {
-        const { eventName, eventDescription, eventDate, eventVenue, eventImage, eventAuthor } = req.body;
+        const { eventName, eventDescription, eventDate, eventVenue = "College", eventImage, eventAuthor } = req.body;
 
         if (!eventName || !eventDate) {
             return res.status(200).json({ message: "All Fields Required" })
