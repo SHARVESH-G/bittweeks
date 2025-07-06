@@ -1,5 +1,7 @@
 import React, { useState } from "react";
-
+import ImageToBase64 from "../../helper/ImageToBase";
+import { loggedInUser } from "../../hooks/loggedInUser";
+import { Bounce, ToastContainer, toast } from "react-toastify";
 const AddEvent = () => {
   const [eventName, setEventName] = useState("");
   const [description, setDescription] = useState("");
@@ -7,33 +9,75 @@ const AddEvent = () => {
   const [venue, setVenue] = useState("");
   const [image, setImage] = useState(null);
   const [preview, setPreview] = useState(null);
+  const currentUser = loggedInUser()._id;
 
-  const handleImageChange = (e) => {
+  const handleImageChange = async(e) => {
     const file = e.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setImage(reader.result);
-        setPreview(reader.result);
-      };
-      reader.readAsDataURL(file);
+    if(file){
+      const baseImage =await ImageToBase64(file)
+      setImage(baseImage);
+      setPreview(baseImage)
     }
   };
 
-  const handleSubmit = () => {
-    const eventData = { eventName, description, date, venue, image };
-    console.log("Event submitted:", eventData);
-    alert("Event posted!");
-    setEventName("");
-    setDescription("");
-    setDate("");
-    setVenue("");
-    setImage(null);
-    setPreview(null);
+  const handleSubmit =async () => {
+    if(!date || !eventData || !eventName)
+    {
+      return toast.warn('All fields Are Required', {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        transition: Bounce,
+      });
+    }
+    try{
+      const eventData = { eventName , eventDescription:description , eventDate:date , eventVenue:venue , eventImage:image , eventAuthor:currentUser};
+      const response = await postNewDataToDB('/api/addevent', eventData)
+      if(response.status  === 200){
+        toast.success("Event posted successfully!", {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: false,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          transition: Bounce,
+        });
+        setEventName("");
+        setDescription("");
+        setDate("");
+        setVenue("");
+        setImage(null);
+        setPreview(null);
+        return;
+      }
+    }catch(err){
+      toast.error(err.message || "Something Went Wrong", {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        transition: Bounce,
+      });
+    }
+    
+    
   };
 
   return (
     <div className="flex justify-center mt-10">
+      <ToastContainer/>
       <div className="w-full max-w-md bg-white p-6 rounded-2xl shadow-md">
         <h2 className="text-xl font-bold mb-4 text-[var(--colorPrimary)]">
           Create Event

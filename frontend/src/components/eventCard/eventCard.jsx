@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
+import {loggedInUser} from '../../hooks/loggedInUser'
 
-const EventCard = ({ eventName, description, date, image, venue }) => {
+const EventCard = ({ eventName, description, date, image, venue , author ,authorProfilePic ,authorAfllFollowers }) => {
   const [countdown, setCountdown] = useState("");
   const[timeDiff , setTimeDiff] = useState(Infinity)
+  const currentUserId = loggedInUser()._id;
   useEffect(() => {
     const eventDate = new Date(date);
 
@@ -36,7 +38,7 @@ const EventCard = ({ eventName, description, date, image, venue }) => {
         <img src={image} alt={eventName} className="w-full h-60 object-cover rounded-lg mb-3" />
       )}
       <h2 className={`text-xl font-bold text-[var(--colorPrimary)] ${timeDiff <= 0 ? "line-through" : ""}`}>
-        {eventName}
+        {eventName} by {author}
       </h2>
 
       <p className="text-gray-600 mb-2 flex-grow">{description}</p>

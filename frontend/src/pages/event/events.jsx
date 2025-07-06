@@ -1,35 +1,48 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import EventCard from '../../components/eventCard/eventCard';
+import FetchEvent from '../../hooks/userFetchData';
+import { MoonLoader } from 'react-spinners';
 
 const Event = () => {
-  const [events] = useState([
-    {
-      eventName: 'BYTES',
-      description: 'Placement Training',
-      date: '2025-08-20',
-      venue: 'SF2',
-      image: 'https://placehold.co/600x400?text=React+Conf',
-    },
-    {
-      eventName: 'Crayon-D',
-      description: 'Company Handson Training',
-      date: '2024-09-05',
-      venue: 'Delhi Tech Hub',
-      image: 'https://placehold.co/600x400?text=Open+Blog+Meet',
-    },
-  ]);
+  const { data, loading, error } = FetchEvent("/api/getallevent");
+  const [allEvents, setAllEvents] = useState([]);
+
+  useEffect(() => {
+    if (data?.events) {
+      setAllEvents(data.events);
+    }
+  }, [data]);
+
+  if (loading) {
+    return (
+      <div className="flex justify-center py-10">
+        <MoonLoader size={55} color="var(--colorPrimary)" />
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="text-center text-red-500 py-10 font-medium">
+        {error}
+      </div>
+    );
+  }
 
   return (
     <div className="mt-10 px-4">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-2 place-items-center">
-        {events.map((event, index) => (
+        {allEvents.map((event, index) => (
           <EventCard
             key={index}
             eventName={event.eventName}
             description={event.description}
-            date={event.date}
+            date={event.eventDate}
             venue={event.venue}
             image={event.image}
+            author = {event.author.name}
+            authorProfilePic = {event.author.profilePic}
+            authorAfllFollowers = {event.author.allFollowers}
           />
         ))}
       </div>
