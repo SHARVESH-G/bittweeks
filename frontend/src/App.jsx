@@ -4,7 +4,7 @@ import Login from './pages/login/login';
 import Register from './pages/register/register';
 import Layout from './layouts/layout';
 import Home from './pages/home/home';
-import Community from './pages/community/community';
+import LostFound from './pages/foundlost/foundlost';
 import MyPost from './pages/mypost/mypost';
 import Users from './pages/user/user';
 import Profile from './pages/profile/profile';
@@ -25,7 +25,7 @@ function App() {
 
         <Route element={<PrivateRoute><Layout /></PrivateRoute>}>
           <Route path="/dashboard" element={<Home />} />
-          <Route path="/lostfound" element={<Community />} />
+          <Route path="/lostfound" element={<LostFound />} />
           <Route path="/mypost" element={<MyPost />} />
           <Route path="/users" element={<Users />} />
           <Route path="/profile" element={<Profile />} />

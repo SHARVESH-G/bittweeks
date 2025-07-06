@@ -49,7 +49,7 @@ const UserList = () => {
           onClick={toogleUsersList}
         >
           <FaHandshakeAngle size={20} />
-          {showFollowersOnly ? "Show All Users" : "Show Followers Only"}
+          {showFollowersOnly ? "Show All Users" : "Show Following Only"}
         </button>
       </div>
 

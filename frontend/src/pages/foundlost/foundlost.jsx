@@ -44,18 +44,18 @@ export default function BasicTabs() {
 
   return (
     <Box sx={{ width: '100%'}}>
-      <Box sx={{ borderBottom: 1, borderColor: 'divider'}}>
-        <Tabs value={value} onChange={handleChange} aria-label="basic tabs example"   >
-          <Tab label="Join New Group" {...a11yProps(0)} sx={{color:'var(--colorPrimary)' , fontWeight:'800'}} />
-          <Tab label="Your Groups" {...a11yProps(2)} sx={{color:'var(--colorPrimary)' , fontWeight:'800'}} />
-          <Tab label="Create Groups" {...a11yProps(2)} sx={{color:'var(--colorPrimary)' , fontWeight:'800'}} />
+      <Box sx={{ borderBottom: 1, border: 'none'}} >
+        <Tabs value={value} onChange={handleChange}  >
+          <Tab label="All Requests"  sx={{color:'var(--colorPrimary)' , fontWeight:'800'}} />
+          <Tab label="Your Requests"  sx={{color:'var(--colorPrimary)' , fontWeight:'800'}} />
+          <Tab label="Post A Request" sx={{color:'var(--colorPrimary)' , fontWeight:'800'}} />
         </Tabs>
       </Box>
       <CustomTabPanel value={value} index={0}>
         <GroupList />
       </CustomTabPanel>
       <CustomTabPanel value={value} index={1}>
-        Your Groups
+        Requests
       </CustomTabPanel>
       <CustomTabPanel value={value} index={2}>
          <CreateCommunity />

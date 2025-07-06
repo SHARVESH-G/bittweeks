@@ -1,4 +1,4 @@
-import { Box, Typography, Grid  } from "@mui/material";
+import { Box, Typography, Grid} from "@mui/material";
 import { useState } from "react";
 import Input from "../../components/ui/input/input";
 import SelectDept from "../../components/ui/selectInput/selectInput";

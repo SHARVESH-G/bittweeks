@@ -4,6 +4,7 @@ import RecommendedUser from '../recomendedUser/recomendedUser';
 import RecommendedEvent from '../recomendedEvent/recommendedEvent';
 import UserIdCard from '../users/userIdCard/userIdCard';
 import { useState } from 'react';
+import QuoteCard from '../quoteCard/quoteCard';
 
 const RightBar = () => {
   const [isClock , setIsClock] = useState(true);
@@ -15,6 +16,7 @@ const RightBar = () => {
       </div>
       <RecommendedUser />
       <RecommendedEvent />
+      <QuoteCard />
     </div>
   );
 };
