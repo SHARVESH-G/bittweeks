@@ -41,7 +41,7 @@ const CreateCommunity = () => {
           type="file"
           accept="image/*"
           onChange={handleImageChange}
-          className="mb-4 border border-1 border-gray-400 p-2 w-full rounded cursor-pointer"
+          className="mb-4 border-1 border-gray-400 p-2 w-full rounded cursor-pointer"
         />
 
         {preview && (
