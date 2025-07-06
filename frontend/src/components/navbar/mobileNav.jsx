@@ -10,7 +10,7 @@ import { TbAlertHexagonFilled } from 'react-icons/tb';
 
 const navItems = [
   { to: '/dashboard', icon: <TiHome size={24} />, text: 'Home' },
-  { to: '/lostfound', icon: <TbAlertHexagonFilled size={28} />, text: 'Lost / Found' },
+  { to: '/lostfound', icon: <TbAlertHexagonFilled size={28} />, text: 'Items' },
   { to: '/mypost', icon: <RiChatAiFill size={24} />, text: 'My Post' },
   { to: '/users', icon: <FaEarthAmericas size={24} />, text: 'Users' },
   { to: '/events', icon: <MdEmojiEvents size={24} />, text: 'Events' },

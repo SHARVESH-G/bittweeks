@@ -15,7 +15,7 @@ function Layout() {
         <MobileNavbar />
       </div>
 
-      <main className="flex-1 overflow-y-auto px-4 py-6 bg-gray-50 hide-scrollbar">
+      <main className="flex-1 overflow-y-auto px-4 py-6 bg-gray-50 hide-scrollbar md:pb-6 pb-16">
         <div className="max-w-6xl mx-auto">
           <Outlet />
         </div>
