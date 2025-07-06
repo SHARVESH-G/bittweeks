@@ -25,7 +25,7 @@ function App() {
 
         <Route element={<PrivateRoute><Layout /></PrivateRoute>}>
           <Route path="/dashboard" element={<Home />} />
-          <Route path="/community" element={<Community />} />
+          <Route path="/lostfound" element={<Community />} />
           <Route path="/mypost" element={<MyPost />} />
           <Route path="/users" element={<Users />} />
           <Route path="/profile" element={<Profile />} />

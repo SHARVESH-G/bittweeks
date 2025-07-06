@@ -1,12 +1,12 @@
 import React from 'react';
 import { TiHome } from "react-icons/ti";
 import { RiChatAiFill } from "react-icons/ri";
-import { HiUserGroup } from "react-icons/hi2";
 import { IoMdSettings } from "react-icons/io";
 import { SiApostrophe } from "react-icons/si";
 import { IoLogOut } from "react-icons/io5";
 import { MdEmojiEvents } from "react-icons/md";
 import { FaEarthAmericas } from "react-icons/fa6";
+import { TbAlertHexagonFilled } from "react-icons/tb";
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Icon from '../../assets/images/loginLogo.png';
 
@@ -22,7 +22,7 @@ const Sidebar = () => {
 
   const navItems = [
     { to: '/dashboard', icon: <TiHome size={28} />, text: 'Home' },
-    { to: '/community', icon: <HiUserGroup size={28} />, text: 'Group' },
+    { to: '/lostfound', icon: <TbAlertHexagonFilled size={28} />, text: 'Lost / Found' },
     { to: '/mypost', icon: <RiChatAiFill size={28} />, text: 'My Post' },
     { to: '/users', icon: <FaEarthAmericas size={28} />, text: 'Users' },
     { to: '/profile', icon: <IoMdSettings size={28} />, text: 'Settings' },
@@ -57,7 +57,7 @@ const Sidebar = () => {
         <Link
           to="/"
           onClick={handleLogout}
-          className="px-4 py-3 rounded-xl flex items-center text-lg gap-3 text-[var(--colorSecondary)] hover:bg-[var(--colorPrimary)] hover:text-white transition-colors"
+          className="px-4 py-3 rounded-xl flex items-center text-lg gap-3 text-[var(--colorSecondary)] hover:bg-red-500 hover:text-white transition-colors"
         >
           <IoLogOut size={28} />
           <span className="truncate">Logout</span>
