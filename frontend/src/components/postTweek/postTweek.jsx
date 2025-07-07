@@ -5,6 +5,8 @@ import Avatar from "@mui/material/Avatar";
 import { highlightHashtags } from "../../helper/highlightHashTags";
 import { randomColor } from "../../datas/colors";
 import { loggedInUser } from "../../hooks/loggedInUser";
+import { backEndURL } from "../../datas/backendServerLink";
+
 
 function PostTweek({ posts, setPosts }) {
   const currentUser = loggedInUser();
@@ -13,7 +15,7 @@ function PostTweek({ posts, setPosts }) {
 
   const handleLike = async (postId) => {
     try {
-      await fetch(`http://localhost:3000/api/likepost/${postId}`, {
+      await fetch(`${backEndURL}/api/likepost/${postId}`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ userId: currentUserId }),

@@ -1,11 +1,11 @@
 import axios from "axios";
-
+import { backEndURL } from "../datas/backendServerLink";
 export const useHandleFollowing = async ({ user, currentUserId, setUserState }) => {
   if (user._id === currentUserId) return;
 
   try {
     const res = await axios.post(
-      `http://localhost:3000/api/userfollow/${user._id}`,
+      `${backEndURL}/api/userfollow/${user._id}`,
       { currentUser: currentUserId }
     );
 

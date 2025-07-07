@@ -8,6 +8,9 @@ import { FaArrowCircleDown, FaArrowCircleUp } from "react-icons/fa";
 import { MoonLoader } from "react-spinners";
 import axios from "axios";
 import ConfirmModal from "../../components/modals/confirmModal";
+import { backEndURL } from "../../datas/backendServerLink";
+
+
 
 const MyPost = () => {
   const [filter, setFilter] = useState(false);
@@ -27,7 +30,7 @@ const MyPost = () => {
 
   const handleDelete = async () => {
     try {
-      await axios.delete(`http://localhost:3000/api/deletepost/${postToDelete}`);
+      await axios.delete(`${backEndURL}/api/deletepost/${postToDelete}`);
       setRefetchKey((prev) => prev + 1);
     } catch (err) {
       console.error("Failed to delete post:", err);

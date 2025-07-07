@@ -42,10 +42,10 @@ export default function BasicTabs() {
     <Box sx={{ width: '100%'}}>
       <Box sx={{ borderBottom: 1, border: 'none' }} >
         <Tabs value={value} onChange={handleChange}  >
-          <Tab label="Found Requests"  sx={{color:'var(--colorPrimary)' , fontWeight:'800'}} />
-          <Tab label="Lost Requests"  sx={{color:'var(--colorPrimary)' , fontWeight:'800'}} />
-          <Tab label="Your Requests"  sx={{color:'var(--colorPrimary)' , fontWeight:'800'}} />
-          <Tab label="Post A Request" sx={{color:'var(--colorPrimary)' , fontWeight:'800'}} />
+          <Tab label="Found"  sx={{color:'var(--colorPrimary)' , fontWeight:'800'}} />
+          <Tab label="Lost"  sx={{color:'var(--colorPrimary)' , fontWeight:'800'}} />
+          <Tab label="Your"  sx={{color:'var(--colorPrimary)' , fontWeight:'800'}} />
+          <Tab label="Post" sx={{color:'var(--colorPrimary)' , fontWeight:'800'}} />
         </Tabs>
       </Box>
       <CustomTabPanel value={value} index={0}>

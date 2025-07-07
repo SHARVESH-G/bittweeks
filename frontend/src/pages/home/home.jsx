@@ -4,6 +4,8 @@ import { tweetMaxLength } from "../../datas/projectParameters";
 import { ToastContainer, toast, Bounce } from "react-toastify";
 import axios from "axios";
 import { loggedInUser } from "../../hooks/loggedInUser";
+import { backEndURL } from "../../datas/backendServerLink";
+
 
 const Home = () => {
   const [content, setContent] = useState("");
@@ -11,7 +13,7 @@ const Home = () => {
 
   const fetchPosts = async () => {
     try {
-      const res = await axios.get("http://localhost:3000/api/getallpost");
+      const res = await axios.get(`${backEndURL}/api/getallpost`);
       if (res.status === 200) {
         setPosts(res.data.posts);
       }
@@ -36,7 +38,7 @@ const Home = () => {
     }
 
     try {
-      const res = await axios.post("http://localhost:3000/api/addnewpost", {
+      const res = await axios.post(`${backEndURL}/api/addnewpost`, {
         postTitle: content,
         postAuthor: loggedInUser()._id,
       });

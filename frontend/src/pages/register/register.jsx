@@ -9,6 +9,7 @@ import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast, Bounce } from "react-toastify";
 import ImageToBase64 from "../../helper/ImageToBase";
 import { isBitEmail } from "../../helper/isBitEmail";
+import { backEndURL } from "../../datas/backendServerLink";
 
 
 const Register = () => {
@@ -74,7 +75,7 @@ const Register = () => {
     }
 
     try {
-      const response = await axios.post("http://localhost:3000/api/auth/register", {
+      const response = await axios.post(`${backEndURL}/api/auth/register`, {
         name,
         email,
         password,

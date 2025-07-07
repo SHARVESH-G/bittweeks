@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-
+import { backEndURL } from "../datas/backendServerLink";
 const useFetchData = (endpoint) => {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -9,7 +9,7 @@ const useFetchData = (endpoint) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axios.get(`http://localhost:3000${endpoint}`);
+        const res = await axios.get(`${backEndURL}${endpoint}`);
         setData(res.data);
       } catch (err) {
         setError(err.response?.data?.message || "Something went wrong");

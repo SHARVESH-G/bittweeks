@@ -7,6 +7,8 @@ import { ToastContainer, toast, Bounce } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { backEndURL } from '../../datas/backendServerLink';
+
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -29,7 +31,7 @@ const Login = () => {
     setLoading(true);
 
     try {
-      const res = await axios.post('http://localhost:3000/api/auth/login', {
+      const res = await axios.post(`${backEndURL}/api/auth/login`, {
         email,
         password,
       });

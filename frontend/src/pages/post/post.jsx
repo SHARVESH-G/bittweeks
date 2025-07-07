@@ -5,7 +5,7 @@ import { tweetMaxLength } from "../../datas/projectParameters";
 import { loggedInUser } from "../../hooks/loggedInUser";
 import { ToastContainer, toast, Bounce } from "react-toastify";
 import { useNavigate } from "react-router-dom";
-
+import { backEndURL } from "../../datas/backendServerLink";
 
 const Post = () => {
   const [content, setContent] = useState("");
@@ -61,7 +61,7 @@ const Post = () => {
 
     setLoading(true);
     try {
-      const res = await axios.post("http://localhost:3000/api/addnewpost", {
+      const res = await axios.post(`${backEndURL}/api/addnewpost`, {
         postTitle: content,
         postImage: image,
         postAuthor: loggedInUser()._id,
