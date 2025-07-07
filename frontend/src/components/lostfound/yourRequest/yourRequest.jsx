@@ -1,17 +1,41 @@
-import React, { useState } from 'react'
-import useFetchData from '../../../hooks/userFetchData'
-import LostFoundCard from '../lostFoundCard/lostFoundCard'
-import { loggedInUser } from '../../../hooks/loggedInUser'
-
+import React, { useState } from 'react';
+import useFetchData from '../../../hooks/userFetchData';
+import LostFoundCard from '../lostFoundCard/lostFoundCard';
+import { loggedInUser } from '../../../hooks/loggedInUser';
+import ConfirmModal from '../../../components/modals/confirmModal';
+import deletePostById from '../../../hooks/deleteData';
 
 const YourRequest = () => {
-    const currentUserId = loggedInUser()._id
-  const [searchQuery, setSearchQuery] = useState("")
-  const { data, loading, error } = useFetchData(`/api/alluserreq?userId=${currentUserId}`)
+  const currentUserId = loggedInUser()._id;
+  const [searchQuery, setSearchQuery] = useState("");
+  const [refetchKey, setRefetchKey] = useState(0);
+  const [selectedPostId, setSelectedPostId] = useState(null);
+  const [showConfirm, setShowConfirm] = useState(false);
+
+  const { data, loading, error } = useFetchData(`/api/alluserreq?userId=${currentUserId}&_=${refetchKey}`);
+
+  const handleDeleteClick = (id) => {
+    setSelectedPostId(id);
+    setShowConfirm(true);
+  };
+
+  const handleConfirmDelete = async () => {
+    try {
+      await deletePostById("/deletelostfound", selectedPostId);
+      setRefetchKey((prev) => prev + 1);
+    } catch (err) {
+      console.error("Delete error:", err?.response?.data || err.message);
+      alert("Failed to delete post");
+    } finally {
+      setShowConfirm(false);
+      setSelectedPostId(null);
+    }
+  };
 
   const filteredItems = data?.filter(item =>
     item.reqTitle?.toLowerCase().includes(searchQuery.toLowerCase())
-  )
+  );
+
   return (
     <div>
       <h2 className="text-center text-xl font-semibold">Lost Items</h2>
@@ -32,14 +56,24 @@ const YourRequest = () => {
       <div className="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
         {filteredItems?.length > 0 ? (
           filteredItems.map(item => (
-            <LostFoundCard key={item._id} item={item} />
+            <LostFoundCard
+              key={item._id}
+              item={item}
+              onDeleteClick={() => handleDeleteClick(item._id)}
+            />
           ))
         ) : (
           !loading && <p className="col-span-full text-center text-gray-500">No items found.</p>
         )}
       </div>
+
+      <ConfirmModal
+        show={showConfirm}
+        onCancel={() => setShowConfirm(false)}
+        onConfirm={handleConfirmDelete}
+      />
     </div>
-  )
-}
+  );
+};
 
 export default YourRequest;

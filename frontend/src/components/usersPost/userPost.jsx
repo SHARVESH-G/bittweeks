@@ -1,15 +1,12 @@
 import { formatDistanceToNow } from "date-fns";
-import { IoIosHeartEmpty } from "react-icons/io";
 import Avatar from "@mui/material/Avatar";
 import { randomColor } from "../../datas/colors";
 import { highlightHashtags } from "../../helper/highlightHashTags";
 
-
-const UserPost = ({post}) => {
+const UserPost = ({ post, onDelete }) => {
   return (
     <div
-      key={post._id}
-      className="bg-white my-4 w- px-5 py-4 rounded-xl shadow-sm border border-gray-200 hover:shadow-md transition-all"
+      className="bg-white my-4 px-5 py-4 rounded-xl shadow-sm border border-gray-200 hover:shadow-md transition-all"
     >
       <div className="flex items-start gap-3">
         <Avatar
@@ -45,12 +42,21 @@ const UserPost = ({post}) => {
             <img
               src={post.postImage}
               alt="Post"
-              className="rounded-lg mt-3 w-full max-h-56 object-contains border border-gray-100"
+              className="rounded-lg mt-3 w-full max-h-56 object-contain border border-gray-100"
             />
           )}
 
-          <div className="flex items-center text-sm text-gray-500 mt-2">
+          <div className="flex items-center text-sm text-gray-500 mt-2 justify-between">
             <span>{post.postLikes.length} Likes</span>
+
+            {onDelete && (
+              <button
+                onClick={() => onDelete(post._id)}
+                className="text-red-500 text-xs bg-red-100 px-3 py-1 rounded hover:bg-red-200"
+              >
+                Delete
+              </button>
+            )}
           </div>
         </div>
       </div>

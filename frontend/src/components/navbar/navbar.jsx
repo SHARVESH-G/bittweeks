@@ -5,7 +5,7 @@ import { IoMdSettings } from "react-icons/io";
 import { SiApostrophe } from "react-icons/si";
 import { IoLogOut } from "react-icons/io5";
 import { MdEmojiEvents } from "react-icons/md";
-import { FaEarthAmericas } from "react-icons/fa6";
+import { BiSolidMessageDetail } from "react-icons/bi";
 import { TbAlertHexagonFilled } from "react-icons/tb";
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Icon from '../../assets/images/loginLogo.png';
@@ -24,7 +24,7 @@ const Sidebar = () => {
     { to: '/dashboard', icon: <TiHome size={28} />, text: 'Home' },
     { to: '/lostfound', icon: <TbAlertHexagonFilled size={28} />, text: 'Lost / Found' },
     { to: '/mypost', icon: <RiChatAiFill size={28} />, text: 'My Post' },
-    { to: '/users', icon: <FaEarthAmericas size={28} />, text: 'Users' },
+    { to: '/users', icon: <BiSolidMessageDetail size={28} />, text: 'Message' },
     { to: '/profile', icon: <IoMdSettings size={28} />, text: 'Settings' },
     { to: '/posts', icon: <SiApostrophe size={28} />, text: 'Post' },
     { to: '/events', icon: <MdEmojiEvents size={28} />, text: 'Events' },

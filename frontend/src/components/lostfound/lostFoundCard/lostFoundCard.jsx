@@ -1,9 +1,9 @@
 import React, { useRef, useState } from "react";
 import { Avatar } from "@mui/material";
-import { randomColor } from "../../../datas/colors";
 import Popover from "@mui/material/Popover";
+import { randomColor } from "../../../datas/colors";
 
-const LostFoundCard = ({ item }) => {
+const LostFoundCard = ({ item, onDeleteClick }) => {
   const [anchorEl, setAnchorEl] = useState(null);
   const randomColors = useRef({});
 
@@ -25,10 +25,7 @@ const LostFoundCard = ({ item }) => {
   const id = open ? "image-popover" : undefined;
 
   return (
-    <div
-      key={item._id}
-      className="w-full max-w-sm p-4 border rounded-lg shadow-sm bg-white flex flex-col gap-2"
-    >
+    <div className="w-full max-w-sm p-4 border rounded-lg shadow-sm bg-white flex flex-col gap-2">
       <div className="border-2 border-b-gray-400 border-t-0 border-x-0 flex items-center gap-4 pb-1">
         <Avatar
           sx={{
@@ -41,10 +38,7 @@ const LostFoundCard = ({ item }) => {
         >
           {!item.reqImage && item.reqAuthor.name.slice(0, 1).toUpperCase()}
         </Avatar>
-        <h3
-          className="text-sm text-gray-600 truncate"
-          title={item.reqAuthor.name}
-        >
+        <h3 className="text-sm text-gray-600 truncate" title={item.reqAuthor.name}>
           {item.reqAuthor.name}
         </h3>
       </div>
@@ -53,10 +47,7 @@ const LostFoundCard = ({ item }) => {
         <h3 className="text-lg font-medium truncate" title={item.reqTitle}>
           {item.reqTitle}
         </h3>
-        <p
-          className="text-sm text-gray-600 truncate"
-          title={item.reqContactInfo}
-        >
+        <p className="text-sm text-gray-600 truncate" title={item.reqContactInfo}>
           {item.reqContactInfo}
         </p>
         <p className="text-sm text-gray-500 truncate" title={item.reqPlace}>
@@ -76,8 +67,8 @@ const LostFoundCard = ({ item }) => {
         )}
       </div>
 
-      {item.reqImage && (
-        <div className="flex items-center gap-4 mt-2 justify-center">
+      <div className="flex justify-center gap-4 mt-3">
+        {item.reqImage && (
           <button
             className="rounded-[10px] text-[var(--colorPrimary)] border-1 p-2 border-[var(--colorPrimary)] hover:bg-[var(--colorPrimary)] hover:text-white"
             aria-describedby={id}
@@ -85,31 +76,33 @@ const LostFoundCard = ({ item }) => {
           >
             View Image
           </button>
+        )}
 
-          <Popover
-            id={id}
-            open={open}
-            anchorEl={anchorEl}
-            onClose={handleClose}
-            anchorOrigin={{
-              vertical: "bottom",
-              horizontal: "left",
-            }}
+        {onDeleteClick && (
+          <button
+            onClick={onDeleteClick}
+            className="px-3 py-1 text-sm bg-red-500 text-white rounded hover:bg-red-600"
           >
-            <div style={{ maxWidth: 500, maxHeight: 500 }}>
-              <img
-                src={item.reqImage}
-                alt="Full View"
-                style={{
-                  maxWidth: "100%",
-                  maxHeight: "100%",
-                  objectFit: "contain",
-                }}
-              />
-            </div>
-          </Popover>
+            Delete
+          </button>
+        )}
+      </div>
+
+      <Popover
+        id={id}
+        open={open}
+        anchorEl={anchorEl}
+        onClose={handleClose}
+        anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
+      >
+        <div style={{ maxWidth: 500, maxHeight: 500 }}>
+          <img
+            src={item.reqImage}
+            alt="Full View"
+            style={{ maxWidth: "100%", maxHeight: "100%", objectFit: "contain" }}
+          />
         </div>
-      )}
+      </Popover>
     </div>
   );
 };

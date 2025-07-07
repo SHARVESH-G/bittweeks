@@ -1,5 +1,5 @@
 import express from 'express';
-import {addNewPost,fetchAllPost,fetchUserPost,toggleLike} from '../controller/addPostController.js';
+import {addNewPost,fetchAllPost,fetchUserPost,toggleLike,deletePost} from '../controller/addPostController.js';
 
 const router = express.Router();
 
@@ -8,5 +8,6 @@ router.get("/getallpost", fetchAllPost);
 router.get("/myposts", fetchUserPost);
 
 router.post("/likepost/:postId", toggleLike);
+router.delete("/deletepost/:postId", deletePost);
 
 export default router;

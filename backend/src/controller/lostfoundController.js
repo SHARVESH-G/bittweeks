@@ -51,4 +51,23 @@ const fetAllLostFoundOfTheUser = async(req,res) => {
     }
 }
 
-export { postLostFoundRequest , fetchAllLostRequest , fetchAllFoundRequest , fetAllLostFoundOfTheUser};
+
+
+const deleteLostFoundRequests = async (req, res) => {
+  try {
+    const { reqId } = req.params;
+
+    const deleted = await LostFound.findByIdAndDelete(reqId);
+
+    if (!deleted) {
+      return res.status(404).json({ message: "Request not found" });
+    }
+
+    return res.status(200).json({ message: "Request deleted successfully" });
+  } catch (err) {
+    return res.status(500).json({ message: "Something went wrong" });
+  }
+};
+
+
+export { postLostFoundRequest , fetchAllLostRequest , fetchAllFoundRequest , fetAllLostFoundOfTheUser , deleteLostFoundRequests };

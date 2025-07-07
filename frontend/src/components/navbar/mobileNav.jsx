@@ -3,16 +3,17 @@ import { TiHome } from "react-icons/ti";
 import { RiChatAiFill } from "react-icons/ri";
 import { IoMdSettings } from "react-icons/io";
 import { SiApostrophe } from "react-icons/si";
-import { FaEarthAmericas } from "react-icons/fa6";
 import { MdEmojiEvents } from "react-icons/md";
 import { Link } from 'react-router-dom';
 import { TbAlertHexagonFilled } from 'react-icons/tb';
+import { BiSolidMessageDetail } from "react-icons/bi";
+
 
 const navItems = [
   { to: '/dashboard', icon: <TiHome size={24} />, text: 'Home' },
   { to: '/lostfound', icon: <TbAlertHexagonFilled size={28} />, text: 'Items' },
   { to: '/mypost', icon: <RiChatAiFill size={24} />, text: 'My Post' },
-  { to: '/users', icon: <FaEarthAmericas size={24} />, text: 'Users' },
+  { to: '/users', icon: <BiSolidMessageDetail size={24} />, text: 'Message' },
   { to: '/events', icon: <MdEmojiEvents size={24} />, text: 'Events' },
   { to: '/profile', icon: <IoMdSettings size={24} />, text: 'Settings' },
   { to: '/posts', icon: <SiApostrophe size={24} />, text: 'Post' },

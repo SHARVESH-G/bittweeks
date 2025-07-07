@@ -32,9 +32,6 @@ const fetchAllPost = async (req, res) => {
 };
 
 
-
-
-
 const fetchUserPost = async(req,res)=>{
   try{
     const {userId} = req.query;
@@ -76,4 +73,21 @@ const toggleLike = async (req, res) => {
 };
 
 
-export { addNewPost , fetchAllPost , fetchUserPost , toggleLike};
+const deletePost = async (req, res) => {
+  try {
+    const { postId } = req.params;
+
+    const deleted = await Post.findByIdAndDelete(postId);
+
+    if (!deleted) {
+      return res.status(404).json({ message: "Post not found" });
+    }
+
+    return res.status(200).json({ message: "Post deleted successfully" });
+  } catch (err) {
+    return res.status(500).json({ message: "Something went wrong" });
+  }
+};
+
+export { addNewPost, fetchAllPost, fetchUserPost, toggleLike, deletePost };
+
