@@ -3,8 +3,10 @@ import PropTypes from 'prop-types';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
-import GroupList from '../../components/groups/groupList/groupList';
-import CreateRequest from '../../components/groups/createRequest/createRequest';
+import CreateRequest from '../../components/lostfound/createRequest/createRequest';
+import LostList from '../../components/lostfound/lostList/lostList';
+import FoundList from '../../components/lostfound/foundList/foundList.jsx';
+import YourRequest from '../../components/lostfound/yourRequest/yourRequest.jsx';
 
 function CustomTabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -47,13 +49,13 @@ export default function BasicTabs() {
         </Tabs>
       </Box>
       <CustomTabPanel value={value} index={0}>
-        <GroupList />
+        <FoundList />
       </CustomTabPanel>
       <CustomTabPanel value={value} index={1}>
-        Requests
+        <LostList />
       </CustomTabPanel>
       <CustomTabPanel value={value} index={2}>
-        Your Request
+        <YourRequest/>
       </CustomTabPanel>
       <CustomTabPanel value={value} index={3}>
          <CreateRequest />

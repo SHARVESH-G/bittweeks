@@ -20,7 +20,7 @@ const postLostFoundRequest = async(req , res) =>{
 
 const fetchAllLostRequest = async(req,res) => {
     try{
-        const allReq = await LostFound.find({}).populate('reqAuthor' , 'name profilePic').sort({createdAt:-1})
+        const allReq = await LostFound.find({}).populate('reqAuthor' , 'name profilePic _id').sort({createdAt:-1})
         const allLost = allReq.filter((req)=>req.reqType === 'lost');
         return res.status(200).json(allLost)
     }
@@ -31,7 +31,7 @@ const fetchAllLostRequest = async(req,res) => {
 
 const fetchAllFoundRequest = async(req,res) => {
     try{
-        const allReq = await LostFound.find({}).populate('reqAuthor' , 'name profilePic').sort({createdAt:-1})
+        const allReq = await LostFound.find({}).populate('reqAuthor' , 'name profilePic _id').sort({createdAt:-1})
         const allFound = allReq.filter((req)=>req.reqType === 'found');
         return res.status(200).json(allFound)
     }
@@ -40,5 +40,15 @@ const fetchAllFoundRequest = async(req,res) => {
     }
 }
 
+const fetAllLostFoundOfTheUser = async(req,res) => {
+    try{
+        const {userId} = req.query;
+        const allUserRequest = await LostFound.find({reqAuthor:userId}).sort({createdAt:-1})
+        return res.status(200).json(allUserRequest);
+    }
+    catch(err){
+        return res.status(500).json({message:"NOT Fetching Properly"})
+    }
+}
 
-export { postLostFoundRequest , fetchAllLostRequest , fetchAllFoundRequest};
+export { postLostFoundRequest , fetchAllLostRequest , fetchAllFoundRequest , fetAllLostFoundOfTheUser};

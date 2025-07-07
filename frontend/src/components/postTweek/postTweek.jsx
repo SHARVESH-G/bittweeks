@@ -65,7 +65,7 @@ function PostTweek() {
   }
 
   return (
-    <div className="w-full max-w-[95%] sm:max-w-xl md:max-w-2xl lg:max-w-3xl mx-auto space-y-6 px-2 sm:px-4">
+    <div className="w-full max-w-[95%] sm:max-w-xl md:max-w-2xl lg:max-w-3xl mx-auto space-y-2 px-2 sm:px-4">
       {posts.map((post) =>{ 
         const isFollowing = post.postAuthor.allFollowers.some(id=>id === currentUserId)
         return(
