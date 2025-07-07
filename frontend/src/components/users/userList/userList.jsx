@@ -14,7 +14,7 @@ const UserList = () => {
   const users = data?.users || [];
   const currentUserId = loggedInUser()._id;
 
-  const filteredUsers = users.filter((user) => {
+  const filteredUsers = search.trim()===""?[]:users.filter((user) => {
     const matchesSearch =
       user.name.toLowerCase().includes(search.toLowerCase()) ||
       user.email.toLowerCase().includes(search.toLowerCase()) ||
@@ -39,7 +39,7 @@ const UserList = () => {
         <input
           type="text"
           placeholder="Search by name, email, or department..."
-          className="w-xl px-4 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--colorPrimary)]"
+          className="w-[80%] px-4 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--colorPrimary)]"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
           autoComplete="off"
@@ -49,7 +49,7 @@ const UserList = () => {
           onClick={toogleUsersList}
         >
           <FaHandshakeAngle size={20} />
-          {showFollowersOnly ? "Show All Users" : "Show Following Only"}
+          {showFollowersOnly ? "All Users" : "Following Only"}
         </button>
       </div>
 
@@ -60,7 +60,7 @@ const UserList = () => {
       ) : error ? (
         <p className="text-center text-red-500">{error}</p>
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        <div className="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-1 gap-5">
           {filteredUsers.map((user) => (
             <div key={user._id} className="cursor-pointer">
               <UserCard user={user} />
