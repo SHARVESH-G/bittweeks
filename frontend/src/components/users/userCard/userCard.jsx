@@ -16,7 +16,6 @@ const UserCard = ({ user }) => {
 
   return (
     <div className="bg-white rounded-xl p-4 shadow-sm hover:shadow-md transition-all duration-200 flex flex-col gap-4 border border-[var(--colorPrimary)] w-full h-full">
-      {/* Top section: Avatar and Info */}
       <div className="flex items-start gap-4">
         <Avatar
           src={displayUser.profilePic || ""}
