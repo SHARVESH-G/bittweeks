@@ -43,7 +43,7 @@ const fetchAllFoundRequest = async(req,res) => {
 const fetAllLostFoundOfTheUser = async(req,res) => {
     try{
         const {userId} = req.query;
-        const allUserRequest = await LostFound.find({reqAuthor:userId}).sort({createdAt:-1})
+        const allUserRequest = await LostFound.find({reqAuthor:userId}).populate('reqAuthor',"name profilePic _id").sort({createdAt:-1})
         return res.status(200).json(allUserRequest);
     }
     catch(err){

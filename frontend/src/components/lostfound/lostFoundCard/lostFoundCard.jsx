@@ -39,7 +39,7 @@ const LostFoundCard = ({ item }) => {
           }}
           src={item?.reqImage}
         >
-          {item.reqAuthor.name.slice(0, 1).toUpperCase()}
+          {!item.reqImage && item.reqAuthor.name.slice(0, 1).toUpperCase()}
         </Avatar>
         <h3
           className="text-sm text-gray-600 truncate"
