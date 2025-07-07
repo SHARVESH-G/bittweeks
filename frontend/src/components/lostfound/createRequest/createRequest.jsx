@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import postNewDataToDB from "../../../hooks/postData";
 import { Bounce, ToastContainer, toast } from "react-toastify";
 import { loggedInUser } from "../../../hooks/loggedInUser";
+import { useNavigate } from "react-router-dom";
+
 
 const CreateRequest = () => {
   const [reqTitle, setReqTitle] = useState("");
@@ -11,6 +13,8 @@ const CreateRequest = () => {
   const [image, setImage] = useState(null);
   const [preview, setPreview] = useState(null);
   const currentUserId = loggedInUser()._id;
+  const navi = useNavigate();
+
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     if (file) {
@@ -58,6 +62,7 @@ const CreateRequest = () => {
               setPlace("");
               setImage(null);
               setImage(null);
+              navi('/lostfound');
               return;
       }
     }
