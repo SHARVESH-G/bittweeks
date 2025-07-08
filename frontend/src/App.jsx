@@ -15,8 +15,21 @@ import Events from './pages/event/events';
 
 import PublicRoute from './routes/PublicRoute';
 import PrivateRoute from './routes/PrivateRoute';
+import ChatPage from './components/users/chatPage/chatPage';
+import { loggedInUser } from './hooks/loggedInUser';
+import { useState } from 'react';
+import { useEffect } from 'react';
 
 function App() {
+  const [currentUserId, setCurrentUserId] = useState(null);
+
+  useEffect(() => {
+    const user = loggedInUser();
+    if (user && user._id) {
+      setCurrentUserId(user._id);
+    }
+  }, []);
+
   return (
     <BrowserRouter>
       <Routes>
@@ -34,6 +47,7 @@ function App() {
             <Route index element={<Events />} />
             <Route path="add" element={<AddEvent />} />
           </Route>
+          <Route path="/messages/:recipientId" element={<ChatPage currentUserId={currentUserId} />} />
 
           <Route path="*" element={<Navigate to="/dashboard" />} />
         </Route>

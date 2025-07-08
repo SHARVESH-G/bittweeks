@@ -4,10 +4,11 @@ import { randomColor } from "../../../datas/colors";
 import { useRef, useState } from "react";
 import { loggedInUser } from "../../../hooks/loggedInUser";
 import { useHandleFollowing } from "../../../hooks/handleFollowing";
-
+import { useNavigate } from "react-router-dom";
 const UserCard = ({ user }) => {
   const usersColors = useRef({});
   const currentUser = loggedInUser();
+  const navigate = useNavigate(); 
 
   const isFollowing = user.allFollowers?.includes(currentUser._id);
   const [thisUser, setThisUser] = useState({ ...user, followed: isFollowing });
@@ -93,6 +94,7 @@ const UserCard = ({ user }) => {
               backgroundColor: "var(--colorPrimary)",
             }
           }}
+          onClick={() => navigate(`/messages/${displayUser._id}`)}
         >
           Message
         </Button>

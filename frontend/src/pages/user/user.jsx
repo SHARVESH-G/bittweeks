@@ -3,15 +3,11 @@ import PropTypes from 'prop-types';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
-import UserList from '../../components/users/userList/userList'
-
-
+import UserList from '../../components/users/userList/userList';
+import MessageSection from '../../components/users/messageSection/messageSection';
 
 function CustomTabPanel(props) {
   const { children, value, index, ...other } = props;
-
-  
-
   return (
     <div
       role="tabpanel"
@@ -30,23 +26,25 @@ CustomTabPanel.propTypes = {
   index: PropTypes.number.isRequired,
   value: PropTypes.number.isRequired,
 };
+
 function User() {
   const [value, setValue] = React.useState(0);
-
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
 
+  const currentUser = JSON.parse(localStorage.getItem("user"));
+
   return (
-    <Box sx={{ width: '100%'}}>
-      <Box sx={{ borderBottom: 1, border: 'none' }} >
-        <Tabs value={value} onChange={handleChange}  >
-          <Tab label="Direct Messages"  sx={{color:'var(--colorPrimary)' , fontWeight:'800'}} />
-          <Tab label="All Users"  sx={{color:'var(--colorPrimary)' , fontWeight:'800'}} />
+    <Box sx={{ width: '100%' }}>
+      <Box sx={{ borderBottom: 1, border: 'none' }}>
+        <Tabs value={value} onChange={handleChange}>
+          <Tab label="Direct Messages" sx={{ color: 'var(--colorPrimary)', fontWeight: '800' }} />
+          <Tab label="All Users" sx={{ color: 'var(--colorPrimary)', fontWeight: '800' }} />
         </Tabs>
       </Box>
       <CustomTabPanel value={value} index={0}>
-        <h3>Direct Message</h3>
+        <MessageSection currentUserId={currentUser?._id} />
       </CustomTabPanel>
       <CustomTabPanel value={value} index={1}>
         <UserList />
