@@ -29,7 +29,7 @@ const Register = () => {
     if (file.size > 1024 * 1024) {
       toast.warn("Image too large. Please upload an image smaller than 1MB.", {
         position: "top-center",
-        autoClose: 5000,
+        autoClose: 3000,
         theme: "colored",
         transition: Bounce,
       });

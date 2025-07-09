@@ -9,7 +9,6 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { backEndURL } from '../../datas/backendServerLink';
 
-
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -58,7 +57,6 @@ const Login = () => {
         theme: 'colored',
         transition: Bounce,
       });
-      console.log("Login error:", err.response);
     } finally {
       setLoading(false);
     }
@@ -101,6 +99,16 @@ const Login = () => {
             <button type="submit" className="login-btn" disabled={loading}>
               {loading ? 'Logging in...' : 'Login'}
             </button>
+            <button
+              onClick={() => {
+                window.location.href = "http://localhost:3000/api/auth/google";
+              }}
+              className="login-btn"
+            >
+              Login with Google
+            </button>
+
+
           </form>
 
           <p className="text-center text-sm text-gray-500 mt-6">
@@ -110,6 +118,7 @@ const Login = () => {
             </a>
           </p>
         </div>
+        
       </Box>
     </>
   );

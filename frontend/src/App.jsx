@@ -1,4 +1,6 @@
+// App.jsx
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 
 import Login from './pages/login/login';
 import Register from './pages/register/register';
@@ -12,30 +14,49 @@ import Post from './pages/post/post';
 import AddEvent from './pages/event/addEvent';
 import EventsLayout from './layouts/eventsLayout';
 import Events from './pages/event/events';
-
+import ChatPage from './components/users/chatPage/chatPage';
+import OnboardingPage from './pages/Onboarding/Onboarding'
 import PublicRoute from './routes/PublicRoute';
 import PrivateRoute from './routes/PrivateRoute';
-import ChatPage from './components/users/chatPage/chatPage';
 import { loggedInUser } from './hooks/loggedInUser';
-import { useState } from 'react';
-import { useEffect } from 'react';
+import { fetchAndStoreUser } from './routes/useAuthUser';
 
 function App() {
   const [currentUserId, setCurrentUserId] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const user = loggedInUser();
-    if (user && user._id) {
-      setCurrentUserId(user._id);
-    }
+    const loadUser = async () => {
+      const localUser = loggedInUser();
+
+      if (localUser) {
+        setCurrentUserId(localUser._id);
+        setLoading(false);
+        return;
+      }
+
+      const serverUser = await fetchAndStoreUser();
+      if (serverUser?._id) {
+        setCurrentUserId(serverUser._id);
+      }
+
+      setLoading(false);
+    };
+
+    loadUser();
   }, []);
+
+  if (loading) return <p>Loading...</p>; // Prevent flicker while checking login
 
   return (
     <BrowserRouter>
       <Routes>
+        {/* Public routes */}
         <Route path="/login" element={<PublicRoute><Login /></PublicRoute>} />
         <Route path="/register" element={<PublicRoute><Register /></PublicRoute>} />
+        <Route path="/onboarding" element={<OnboardingPage />} />
 
+        {/* Protected routes */}
         <Route element={<PrivateRoute><Layout /></PrivateRoute>}>
           <Route path="/dashboard" element={<Home />} />
           <Route path="/lostfound" element={<LostFound />} />
@@ -48,10 +69,10 @@ function App() {
             <Route path="add" element={<AddEvent />} />
           </Route>
           <Route path="/messages/:recipientId" element={<ChatPage currentUserId={currentUserId} />} />
-
           <Route path="*" element={<Navigate to="/dashboard" />} />
         </Route>
 
+        {/* Default route */}
         <Route path="/" element={<Navigate to="/login" />} />
       </Routes>
     </BrowserRouter>

@@ -31,7 +31,7 @@ const CreateRequest = () => {
     if(!reqTitle || !reqType || !contactInfo){
       return toast.warn('All fields Are Required', {
         position: "top-center",
-        autoClose: 5000,
+        autoClose: 3000,
         hideProgressBar: false,
         closeOnClick: false,
         pauseOnHover: true,
@@ -47,7 +47,7 @@ const CreateRequest = () => {
       if(response.status  === 200){
               toast.success("Event posted successfully!", {
                 position: "top-center",
-                autoClose: 5000,
+                autoClose: 3000,
                 hideProgressBar: false,
                 closeOnClick: false,
                 pauseOnHover: true,
@@ -69,7 +69,7 @@ const CreateRequest = () => {
     catch(err){
       toast.error(err.message || "Something Went Wrong", {
               position: "top-center",
-              autoClose: 5000,
+              autoClose: 3000,
               hideProgressBar: false,
               closeOnClick: false,
               pauseOnHover: true,

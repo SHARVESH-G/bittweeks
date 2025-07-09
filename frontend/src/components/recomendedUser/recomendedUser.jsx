@@ -2,7 +2,6 @@ import { useEffect, useRef, useState } from "react";
 import { Avatar } from "@mui/material";
 import { Link } from "react-router-dom";
 import useFetchData from "../../hooks/userFetchData";
-import CustomChip from "../ui/chip/chip";
 import { MoonLoader } from "react-spinners";
 import { loggedInUser } from "../../hooks/loggedInUser";
 import RecommendedUserCard from "./recommendedUserCard";

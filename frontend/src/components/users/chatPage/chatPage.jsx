@@ -71,7 +71,7 @@ const ChatPage = ({ currentUserId }) => {
   };
 
   return (
-    <div className="relative w-full sm:h-[90vh] bg-[var(--colorPrimary)]/20 overflow-hidden h-[82vh] by-4">
+    <div className="relative w-full sm:h-[90vh] bg-[var(--colorPrimary)]/8 overflow-hidden h-[82vh] by-4">
       <div className="absolute top-0 left-0 w-full z-10 p-4 bg-white shadow flex items-center gap-3 border-b">
         <Link to='/users' className="px-2 py-1 rounded flex items-center gap-2 text-[var(--colorPrimary)] border-1 border-[var(--colorPrimary)] hover:text-white hover:bg-[var(--colorPrimary)]"><IoMdArrowRoundBack/>Back</Link>
         <div className="flex items-center gap-2">

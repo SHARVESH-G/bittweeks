@@ -1,3 +1,4 @@
-export const loggedInUser =()=> {
-    return JSON.parse(localStorage.getItem('user'));
-}
+export const loggedInUser = () => {
+  const user = localStorage.getItem("user");
+  return user ? JSON.parse(user) : null;
+};

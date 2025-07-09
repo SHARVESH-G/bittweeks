@@ -1,11 +1,9 @@
 import { Navigate } from 'react-router-dom';
-
-const isAuthenticated = () => {
-  return !!localStorage.getItem('token');
-};
+import { loggedInUser } from '../hooks/loggedInUser';
 
 const PublicRoute = ({ children }) => {
-  return isAuthenticated() ? <Navigate to="/dashboard" /> : children;
+  const user = loggedInUser();
+  return user ? <Navigate to="/dashboard" /> : children;
 };
 
 export default PublicRoute;

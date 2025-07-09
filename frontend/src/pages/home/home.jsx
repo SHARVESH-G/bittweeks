@@ -30,7 +30,7 @@ const Home = () => {
     if (!content.trim()) {
       toast.info("Enter Title", {
         position: "top-center",
-        autoClose: 5000,
+        autoClose: 3000,
         theme: "colored",
         transition: Bounce,
       });
@@ -46,7 +46,7 @@ const Home = () => {
       if (res.status === 201) {
         toast.success("Success!", {
           position: "top-center",
-          autoClose: 5000,
+          autoClose: 3000,
           theme: "colored",
           transition: Bounce,
         });
@@ -58,7 +58,7 @@ const Home = () => {
       console.error("Post failed:", err);
       toast.info("Something went wrong while posting", {
         position: "top-center",
-        autoClose: 5000,
+        autoClose: 3000,
         theme: "colored",
         transition: Bounce,
       });

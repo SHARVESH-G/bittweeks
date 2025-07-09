@@ -22,7 +22,7 @@ const Post = () => {
     if (file.size > 1024 * 1024) {
       toast.warn("The Image Size Should Be Less Than 1MB", {
         position: "top-center",
-        autoClose: 5000,
+        autoClose: 3000,
         hideProgressBar: false,
         closeOnClick: false,
         pauseOnHover: true,
@@ -47,7 +47,7 @@ const Post = () => {
     if (!content) {
       toast.info('Enter Title', {
         position: "top-center",
-        autoClose: 5000,
+        autoClose: 3000,
         hideProgressBar: false,
         closeOnClick: false,
         pauseOnHover: true,
@@ -70,7 +70,7 @@ const Post = () => {
       if (res.status === 201) {
         toast.success('🦄 Wow so easy!', {
           position: "top-center",
-          autoClose: 5000,
+          autoClose: 3000,
           hideProgressBar: false,
           closeOnClick: false,
           pauseOnHover: true,
@@ -88,7 +88,7 @@ const Post = () => {
       console.error("Post failed:", err);
       toast.info('Something went wrong while posting ', {
         position: "top-center",
-        autoClose: 5000,
+        autoClose: 3000,
         hideProgressBar: false,
         closeOnClick: false,
         pauseOnHover: true,
