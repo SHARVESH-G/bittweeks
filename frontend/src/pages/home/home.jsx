@@ -72,7 +72,7 @@ const Home = () => {
         <div className="flex w-[90%] justify-between items-center border-2 border-b-black border-x-0 border-t-0 gap-2 mb-6 p-6">
           <textarea
             rows="1"
-            placeholder="What's happening?"
+            placeholder="Post"
             className="w-[85%] resize-none border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-[var(--colorPrimary)]"
             maxLength={tweetMaxLength}
             value={content}

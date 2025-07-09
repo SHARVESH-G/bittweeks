@@ -16,7 +16,6 @@ const navItems = [
   { to: '/users', icon: <BiSolidMessageDetail size={24} />, text: 'Message' },
   { to: '/events', icon: <MdEmojiEvents size={24} />, text: 'Events' },
   { to: '/profile', icon: <IoMdSettings size={24} />, text: 'Settings' },
-  { to: '/posts', icon: <SiApostrophe size={24} />, text: 'Post' },
 ];
 
 const MobileNavbar = () => {
@@ -30,7 +29,6 @@ const MobileNavbar = () => {
             className="flex flex-col text-[var(--colorSecondary)] hover:bg-[var(--colorPrimary)] hover:text-white p-3 rounded-[20px] items-center text-3xl gap-1"
           >
             {item.icon}
-            <span className="text-xs">{item.text}</span>
           </Link>
         ))}
       </nav>
