@@ -13,7 +13,6 @@ const Event = () => {
     }
   }, [data]);
 
-
   if (loading) {
     return (
       <div className="flex justify-center py-10">
@@ -30,22 +29,29 @@ const Event = () => {
     );
   }
 
+  // ✅ Filter out invalid events (no author)
+  const validEvents = allEvents.filter(event => event && event.author);
+
   return (
     <div className="mt-10 px-4">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-2 place-items-center">
-        {allEvents.length===0?(<h2>No Upcomming Events</h2>) :(allEvents.map((event) => (
-          <EventCard
-            key={event._id}
-            eventName={event.eventName}
-            description={event.description}
-            date={event.eventDate}
-            venue={event.venue}
-            image={event.image}
-            author = {event.author.name}
-            authorProfilePic = {event.author.profilePic}
-            authorAfllFollowers = {event.author.allFollowers}
-          />
-        )))}
+        {validEvents.length === 0 ? (
+          <h2>No Upcoming Events</h2>
+        ) : (
+          validEvents.map((event) => (
+            <EventCard
+              key={event._id}
+              eventName={event.eventName || "Untitled Event"}
+              description={event.description || "No description available."}
+              date={event.eventDate || "TBD"}
+              venue={event.venue || "Venue not specified"}
+              image={event.image || ""}
+              author={event.author?.name || "Unknown Author"}
+              authorProfilePic={event.author?.profilePic || ""}
+              authorAfllFollowers={event.author?.allFollowers || []}
+            />
+          ))
+        )}
       </div>
     </div>
   );
