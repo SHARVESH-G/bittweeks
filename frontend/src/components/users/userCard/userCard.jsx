@@ -5,18 +5,23 @@ import { useRef, useState } from "react";
 import { loggedInUser } from "../../../hooks/loggedInUser";
 import { useHandleFollowing } from "../../../hooks/handleFollowing";
 import { useNavigate } from "react-router-dom";
+
 const UserCard = ({ user }) => {
   const usersColors = useRef({});
   const currentUser = loggedInUser();
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
 
+  // Determine if current user is following this user
   const isFollowing = user.allFollowers?.includes(currentUser._id);
+
+  // Local state to manage this card’s follow status
   const [thisUser, setThisUser] = useState({ ...user, followed: isFollowing });
 
   const displayUser = thisUser;
 
   return (
     <div className="bg-white rounded-xl p-4 shadow-sm hover:shadow-md transition-all duration-200 flex flex-col gap-4 border border-[var(--colorPrimary)] w-full h-full">
+      {/* User info section */}
       <div className="flex items-start gap-4">
         <Avatar
           src={displayUser.profilePic || ""}
@@ -33,20 +38,31 @@ const UserCard = ({ user }) => {
             fontSize: 22,
           }}
         >
-          {!displayUser.profilePic && displayUser.name.slice(0, 1).toUpperCase()}
+          {!displayUser.profilePic &&
+            displayUser.name?.slice(0, 1).toUpperCase()}
         </Avatar>
 
         <div className="flex flex-col">
-          <h2 className="text-base font-semibold text-gray-800">{displayUser.name}</h2>
+          <h2 className="text-base font-semibold text-gray-800">
+            {displayUser.name}
+          </h2>
           <p className="text-xs text-gray-500">{displayUser.email}</p>
-          <p className="text-xs text-gray-500">Followers: {displayUser.allFollowers.length}</p>
+          <p className="text-xs text-gray-500">
+            Followers: {displayUser.allFollowers?.length || 0}
+          </p>
+
+          {/* Department badge with fallback */}
           <span className="mt-1 inline-block text-[10px] text-[var(--colorPrimary)] bg-gray-100 border border-[var(--colorPrimary)] px-2 py-[2px] rounded-full w-fit">
-            {DeptCodeFetcher(displayUser.department.toUpperCase())}
+            {displayUser.department
+              ? DeptCodeFetcher(displayUser.department.toUpperCase())
+              : "Unknown Dept"}
           </span>
         </div>
       </div>
 
+      {/* Buttons */}
       <div className="mt-auto flex flex-col sm:flex-row gap-2 w-full justify-between">
+        {/* Follow / Unfollow Button */}
         <Button
           fullWidth
           variant="outlined"
@@ -58,10 +74,12 @@ const UserCard = ({ user }) => {
             borderRadius: "8px",
             color: displayUser.followed ? "red" : "var(--colorPrimary)",
             borderColor: displayUser.followed ? "red" : "var(--colorPrimary)",
-            '&:hover':{
-              color: "white" ,
-              backgroundColor: displayUser.followed ? "red" : "var(--colorPrimary)",
-            }
+            "&:hover": {
+              color: "white",
+              backgroundColor: displayUser.followed
+                ? "red"
+                : "var(--colorPrimary)",
+            },
           }}
           onClick={() =>
             useHandleFollowing({
@@ -78,6 +96,7 @@ const UserCard = ({ user }) => {
             : "Follow"}
         </Button>
 
+        {/* Message Button */}
         <Button
           fullWidth
           variant="outlined"
@@ -89,10 +108,10 @@ const UserCard = ({ user }) => {
             borderRadius: "8px",
             color: "var(--colorPrimary)",
             borderColor: "var(--colorPrimary)",
-            '&:hover':{
+            "&:hover": {
               color: "white",
               backgroundColor: "var(--colorPrimary)",
-            }
+            },
           }}
           onClick={() => navigate(`/messages/${displayUser._id}`)}
         >

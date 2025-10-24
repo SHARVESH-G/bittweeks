@@ -7,19 +7,14 @@ const LostFoundCard = ({ item, onDeleteClick }) => {
   const [anchorEl, setAnchorEl] = useState(null);
   const randomColors = useRef({});
 
-  const authorId = item.reqAuthor._id;
+  const authorId = item?.reqAuthor?._id || "unknown";
   if (!randomColors.current[authorId]) {
     randomColors.current[authorId] = randomColor();
   }
   const avatarBg = randomColors.current[authorId];
 
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
+  const handleClick = (event) => setAnchorEl(event.currentTarget);
+  const handleClose = () => setAnchorEl(null);
 
   const open = Boolean(anchorEl);
   const id = open ? "image-popover" : undefined;
@@ -36,27 +31,30 @@ const LostFoundCard = ({ item, onDeleteClick }) => {
           }}
           src={item?.reqImage}
         >
-          {!item.reqImage && item.reqAuthor.name.slice(0, 1).toUpperCase()}
+          {!item?.reqImage && item?.reqAuthor?.name?.slice(0, 1)?.toUpperCase()}
         </Avatar>
-        <h3 className="text-sm text-gray-600 truncate" title={item.reqAuthor.name}>
-          {item.reqAuthor.name}
+        <h3
+          className="text-sm text-gray-600 truncate"
+          title={item?.reqAuthor?.name || "Unknown User"}
+        >
+          {item?.reqAuthor?.name || "Unknown User"}
         </h3>
       </div>
 
       <div className="flex flex-col gap-1 overflow-hidden">
-        <h3 className="text-lg font-medium truncate" title={item.reqTitle}>
-          {item.reqTitle}
+        <h3 className="text-lg font-medium truncate" title={item?.reqTitle}>
+          {item?.reqTitle || "Untitled"}
         </h3>
-        <p className="text-sm text-gray-600 truncate" title={item.reqContactInfo}>
-          {item.reqContactInfo}
+        <p className="text-sm text-gray-600 truncate" title={item?.reqContactInfo}>
+          {item?.reqContactInfo || "No contact info"}
         </p>
-        <p className="text-sm text-gray-500 truncate" title={item.reqPlace}>
-          {item.reqPlace}
+        <p className="text-sm text-gray-500 truncate" title={item?.reqPlace}>
+          {item?.reqPlace || "Unknown place"}
         </p>
       </div>
 
       <div className="flex items-center justify-center border border-gray-200 rounded p-2 w-full bg-[var(--colorPrimary)]/15">
-        {item.reqImage ? (
+        {item?.reqImage ? (
           <img
             src={item.reqImage}
             alt="Preview"
@@ -68,7 +66,7 @@ const LostFoundCard = ({ item, onDeleteClick }) => {
       </div>
 
       <div className="flex justify-center gap-4 mt-3">
-        {item.reqImage && (
+        {item?.reqImage && (
           <button
             className="rounded-[10px] text-[var(--colorPrimary)] border-1 p-2 border-[var(--colorPrimary)] hover:bg-[var(--colorPrimary)] hover:text-white"
             aria-describedby={id}
@@ -97,7 +95,7 @@ const LostFoundCard = ({ item, onDeleteClick }) => {
       >
         <div style={{ maxWidth: 500, maxHeight: 500 }}>
           <img
-            src={item.reqImage}
+            src={item?.reqImage}
             alt="Full View"
             style={{ maxWidth: "100%", maxHeight: "100%", objectFit: "contain" }}
           />

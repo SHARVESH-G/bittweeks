@@ -4,7 +4,7 @@ import {Message} from "../models/Message.js";
 
 const setupSocket = (httpServer) => {
   const io = new Server(httpServer, {
-    cors: { origin: "*" },
+    cors: { origin: "*"},
   });
 
   io.on("connection", (socket) => {

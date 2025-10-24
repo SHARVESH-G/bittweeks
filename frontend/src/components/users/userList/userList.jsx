@@ -14,11 +14,15 @@ const UserList = () => {
   const users = data?.users || [];
   const currentUserId = loggedInUser()._id;
 
-  const filteredUsers = search.trim()===""?[]:users.filter((user) => {
+  const filteredUsers = search.trim() === "" ? users : users.filter((user) => {
+    const name = user.name?.toLowerCase() || '';
+    const email = user.email?.toLowerCase() || '';
+    const department = user.department?.toLowerCase() || '';
+
     const matchesSearch =
-      user.name.toLowerCase().includes(search.toLowerCase()) ||
-      user.email.toLowerCase().includes(search.toLowerCase()) ||
-      user.department.toLowerCase().includes(search.toLowerCase());
+      name.includes(search.toLowerCase()) ||
+      email.includes(search.toLowerCase()) ||
+      department.includes(search.toLowerCase());
 
     const isFollowingCurrentUser = user.allFollowers?.includes(currentUserId);
 

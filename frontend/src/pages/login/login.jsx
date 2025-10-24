@@ -74,6 +74,13 @@ const Login = () => {
           <Typography
             variant="h5"
             className="text-center font-semibold mb-6"
+            style={{ color: `black`  , fontFamily:'monospace' , fontWeight:'bold' , fontSize:'50px'}}
+          >
+            BITTweets
+          </Typography>
+          <Typography
+            variant="h5"
+            className="text-center font-semibold mb-6"
             style={{ color: `var(--colorPrimary)` }}
           >
             Welcome Back

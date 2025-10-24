@@ -1,7 +1,6 @@
 import {Message} from "../models/Message.js";
 import {User} from "../models/Users.js";
 
-// 1. Get all messages between two users (used for chat screen)
 export const getMessagesForUser = async (req, res) => {
   const { id: recipientId } = req.params;
   const { currentUserId } = req.query;
@@ -21,7 +20,6 @@ export const getMessagesForUser = async (req, res) => {
   }
 };
 
-// 2. Get all recent conversations for a user (used in inbox / message section)
 export const getUserConversations = async (req, res) => {
   const { userId } = req.params;
 
