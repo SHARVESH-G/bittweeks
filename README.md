@@ -12,11 +12,11 @@ It features:
  - Social posts & interactions
  - Real-time messaging
  - Event management
- - Lost & found services
+ - Lost & found services.
+
 The frontend provides a responsive and interactive user interface, while the backend handles APIs, authentication, business logic, and database operations.
 The backend is powered by Node.js, Express, and MongoDB, following a RESTful architecture with essential middleware to ensure security, scalability, and maintainability.
 Together, they form a complete end-to-end solution rather than just a backend service.
----
 
 ## ✨ Features
 
