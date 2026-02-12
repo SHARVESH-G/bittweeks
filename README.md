@@ -1,13 +1,12 @@
 # 🐦 bittweeks
 
-Welcome to **bittweeks** – a backend-powered project designed to handle social posts, user authentication, events, messaging, and lost & found functionalities. This repository provides the backend server setup using Node.js, Express, MongoDB, and popular middleware for a robust web application.
+Welcome to **bittweeks** – a full-stack web application designed to handle social posts, user authentication, events, messaging, and lost & found functionalities. This repository includes both the frontend and backend, built with modern technologies to deliver a complete, scalable, and responsive user experience.
 
 ---
 
 ## 🚀 Introduction
 
 **bittweeks** is a backend project structured to support a modern web application with features like user registration, authentication, posting, messaging, event management, and lost & found services. It leverages REST API architecture and integrates various essential Node.js packages to ensure security, scalability, and ease of development.
-
 ---
 
 ## ✨ Features
